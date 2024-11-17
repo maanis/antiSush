@@ -35,12 +35,60 @@ router.get('/profile', isLoggedIn, async function (req, res, next) {
   res.render('profile', { user });
 })
 
+router.get('/profile/:id', isLoggedIn, async function (req, res, next) {
+
+  if (req.user._id.toString() === req.params.id) {
+    res.redirect('/profile')
+  } else {
+    let user = await userModel.findOne({ _id: req.params.id }).populate('posts')
+    res.render('userProfile', { user });
+  }
+})
+router.get('/follow/:id', isLoggedIn, async function (req, res, next) {
+  let currentUser = req.user
+  let user = await userModel.findOne({ _id: req.params.id })
+  user.followers.push(currentUser._id)
+  currentUser.followings.push(user._id)
+  await user.save()
+  await currentUser.save()
+  res.redirect(`/profile/${req.params.id}`)
+})
+router.get('/like/:id', isLoggedIn, async function (req, res, next) {
+  let user = req.user
+  let post = await postModel.findOne({ _id: req.params.id })
+  if (post.likes.indexOf(user._id) === -1) {
+    post.likes.push(user._id)
+    await post.save()
+  } else {
+    post.likes.splice(post.likes.indexOf(user._id), 1)
+    await post.save()
+  }
+  res.redirect('/home')
+})
+router.get('/save/:id', isLoggedIn, async function (req, res, next) {
+  let user = req.user
+  let post = await postModel.findOne({ _id: req.params.id })
+  if (user.saves.indexOf(post._id) === -1) {
+    user.saves.push(post._id)
+  } else {
+    user.saves.splice(user.saves.indexOf(post._id), 1)
+  }
+  await user.save()
+  res.redirect('/home')
+})
+
+
+
+
+
 router.get('/edit', isLoggedIn, function (req, res, next) {
   res.render('editProfile', { user: req.user });
 })
 
-router.get('/save', isLoggedIn, function (req, res, next) {
-  res.render('savedPosts');
+router.get('/save', isLoggedIn, async function (req, res, next) {
+  let user = await userModel.findOne({ email: req.user.email }).populate('saves')
+  console.log(user.saves)
+  res.render('savedPosts', { user });
 })
 
 router.post('/profile-setup', isLoggedIn, upload.array('profile', 2), async function (req, res, next) {

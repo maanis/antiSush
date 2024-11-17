@@ -9,14 +9,18 @@ const userModel = mongoose.Schema({
     created_at: Date,
     pfp: Buffer,
     coverPhoto: Buffer,
-    followers: {
-        type: Number,
-        default: 0
-    },
-    followings: {
-        type: Number,
-        default: 0
-    },
+    followers: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'user'
+        }
+    ],
+    followings: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'user'
+        }
+    ],
     posts: [
         {
             type: mongoose.Schema.Types.ObjectId,

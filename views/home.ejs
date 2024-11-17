@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 
@@ -69,13 +71,13 @@
                         class="hidden max-[1335px]:flex justify-center flex-wrap gap-4 max-[1305px]:gap-3 mt-7 max-[1305px]:mt-4 max-[1126px]:gap-1 items-center max-[1020px]:mt-1">
                         <div class="text-center">
                             <p class="font-semibold max-[1305px]:font-normal max-[1335px]:text-[11px]">
-                                <%=user.followers %>
+                                <%=user.followers.length %>
                             </p>
                             <p class="text-zinc-300 max-[1335px]:text-[9px]">Followers</p>
                         </div>
                         <div class="text-center">
                             <p class="font-semibold max-[1305px]:font-normal max-[1335px]:text-[11px]">
-                                <%=user.followings %>
+                                <%=user.followings.length %>
                             </p>
                             <p class="text-zinc-300 max-[1335px]:text-[9px]">Followings</p>
                         </div>
@@ -105,7 +107,7 @@
                                 <div class="text-center">
                                     <p
                                         class="font-semibold text-[11px] max-[1305px]:font-normal max-[1305px]:text-[xs]">
-                                        <%=user.followers %>
+                                        <%=user.followers.length %>
                                     </p>
                                     <p class="text-zinc-300 text-[10px] max-[1305px]:text-xs">
                                         Followers
@@ -113,7 +115,7 @@
                                 </div>
                                 <div class="text-center">
                                     <p class="font-semibold text-[11px] max-[1305px]:font-normal max-[1305px]:text-sm">
-                                        <%=user.followings %>
+                                        <%=user.followings.length %>
                                     </p>
                                     <p class="text-zinc-300 text-[10px] max-[1305px]:text-xs">
                                         Followings
@@ -391,15 +393,35 @@
                                             <%= e.caption %>
                                         </h2>
                                         <div class="box-c flex items-center gap-5 mt-3">
-                                            <div class="flex gap-1 items-center text-[14px]"><i
-                                                    class="fa-regular fa-heart"></i><span>Like</span>
+                                            <a href="/like/<%=e._id %>">
+                                                <div class="flex gap-1 cursor-pointer items-center text-[20px]">
+                                                    <% if (e.likes.indexOf(user._id) !==-1) { %>
+                                                        <i class="fa-solid text-red-500 fa-heart"></i>
+                                                        <% } else { %>
+                                                            <i class="fa-regular fa-heart"></i>
+
+                                                            <% } %>
+
+                                                </div>
+                                            </a>
+                                            <div class="flex gap-1 items-center text-[20px]">
+                                                <i class="fa-regular fa-comment"></i>
                                             </div>
-                                            <div class="flex gap-1 items-center text-[14px]"><i
-                                                    class="fa-regular fa-comment"></i><span>Comment</span></div>
-                                            <div class="flex gap-1 items-center text-[14px]"><i
-                                                    class="fa-regular fa-paper-plane"></i><span>Share</span></div>
-                                            <i class="ml-auto fa-regular fa-bookmark"></i>
+                                            <div class="flex gap-1 items-center text-[20px]"><i
+                                                    class="fa-regular fa-paper-plane"></i>
+                                            </div>
+                                            <a class="ml-auto" href="/save/<%=e._id %>">
+                                                <% if (user.saves.indexOf(e._id) !==-1) { %>
+                                                    <i class="ml-auto fa-solid fa-bookmark"></i>
+                                                    <% } else { %>
+                                                        <i class="ml-auto fa-regular fa-bookmark"></i>
+                                                        <% } %>
+
+                                            </a>
                                         </div>
+                                        <div class="flex gap-2 mt-2 text-[14px]"><span>
+                                                <%=e.likes.length %>
+                                            </span><span>Likes</span></div>
                             </div>
                             <% }) %>
                                 <% }else { %>
@@ -511,6 +533,19 @@
     </div>
 
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            if (localStorage.getItem("my_app_name_here-quote-scroll") != null) {
+                $(window).scrollTop(localStorage.getItem("my_app_name_here-quote-scroll"));
+            }
+
+            $(window).on("scroll", function () {
+                localStorage.setItem("my_app_name_here-quote-scroll", $(window).scrollTop());
+            });
+
+        });
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
         integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="

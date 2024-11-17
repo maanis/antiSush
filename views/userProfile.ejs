@@ -30,12 +30,12 @@
                                     <p class="text-white text-[18px]">
                                         <%= user.username %>
                                     </p>
-                                    <a href="edit">
-                                        <button class="bg-zinc-700 px-2 py-1 rounded-md text-white text-[12px]">Edit
-                                            Profile</button>
+                                    <a href="/follow/<%= user._id %>">
+                                        <button
+                                            class="bg-blue-500 px-2 py-1 rounded-md text-zinc-950  text-[14px]">Follow</button>
                                     </a>
-                                    <button class="bg-zinc-700 px-2 py-1 rounded-md text-white text-[12px]">View
-                                        Archive</button>
+                                    <button
+                                        class="bg-zinc-700 px-2 py-1 rounded-md text-white text-[14px]">Message</button>
                                     <i class="fa-solid fa-gear text-white"></i>
                                 </div>
                                 <div class="dets">
@@ -77,13 +77,14 @@
                 <div class="seperation bg-zinc-800 mt-10 h-[1px]  w-full"></div>
 
                 <% if (user.posts.length> 0) { %>
-                    <div class="posts bgre6 w-full flex my-5 min-h-[50%]">
-                        <div class="flex flex-wrap w-full h-full gap-4">
+                    <div class="posts w-full flex my-5 min-h-[50%]">
+                        <div class="flex w-full h-full justify-center flex-wrap gap-4">
                             <% user.posts.forEach((e)=> { %>
-                                <div class="post ">
-                                    <img src="data:image/png;base64,<%= e.media %>" class="h-52 object-cover" alt="">
+                                <div class="post w-[30%] h-[30%]  ">
+                                    <img src="data:image/png;base64,<%= e.media %>" class="w-full h-full object-cover"
+                                        alt="">
                                 </div>
-                                <% }) %>
+                                <% }) %> 9920713098
                         </div>
                     </div>
                     <% } else { %>
