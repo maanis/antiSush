@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <title>Document</title>
+</head>
+
+<body class="bg-zinc-950 w-full flex">
+
+    <%- include('./partials/sidebar') %>
+
+        <div class="profile w-[85%] h-full overflow-y-auto max-md:w-[100%]">
+            <div class="imgs w-[50%] h-[50%]  mx-auto relative">
+                <div class="imgs w-full h-full">
+                    <div class="cover w-full h-[65%] rounded-md">
+                        <img class="h-[100%] w-full object-cover rounded-md object-top bg-cover"
+                            src="data:image/png;base64,<%= user.coverPhoto.toString('base64') %>" alt="" />
+                        <div class="flex pl-12 gap-4">
+                            <img class="w-44 h-44 object-cover rounded-full object-top  top-[75%]  border-[6px] border-zinc-950 left-5 -translate-y-[25%] pl"
+                                src="data:image/png;base64,<%= user.pfp.toString('base64') %>" alt="" />
+                            <div class="flex flex-col mt-3">
+                                <div class="texts flex  items-center gap-4">
+                                    <p class="text-white text-[18px]">
+                                        <%= user.username %>
+                                    </p>
+                                    <a href="edit">
+                                        <button class="bg-zinc-700 px-2 py-1 rounded-md text-white text-[12px]">Edit
+                                            Profile</button>
+                                    </a>
+                                    <button class="bg-zinc-700 px-2 py-1 rounded-md text-white text-[12px]">View
+                                        Archive</button>
+                                    <i class="fa-solid fa-gear text-white"></i>
+                                </div>
+                                <div class="dets">
+                                    <div
+                                        class="flex justify-between text-white mt-2 flex-wrap gap-5 max-[1305px]:gap-4 max-[1305px]:mt-4 items-center">
+                                        <div class="text-center">
+                                            <p
+                                                class="font-semibold text-[14px] max-[1305px]:font-normal max-[1305px]:text-[xs]">
+                                                <%= user.followers %> Followers
+                                            </p>
+                                        </div>
+                                        <div class="text-center">
+                                            <p
+                                                class="font-semibold text-[14px] max-[1305px]:font-normal max-[1305px]:text-sm">
+                                                <%= user.followings %> Followings
+                                            </p>
+                                        </div>
+                                        <div class="text-center">
+                                            <p
+                                                class="font-semibold text-[14px] max-[1305px]:font-normal max-[1305px]:text-sm">
+                                                <%= user.posts.length %> Posts
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bio text-white mt-2 text-[12px]">
+                                    <p class="text-[14px]">
+                                        <%= user.name %>
+                                    </p>
+                                    <p>
+                                        <%= user.bio %>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="seperation bg-zinc-800 mt-10 h-[1px]  w-full"></div>
+                <div class="flex flex-col mt-8 text-white gap-4 w-full min-h-[50%] justify-center items-center">
+                    <svg aria-label="When you share photos, they will appear on your profile."
+                        class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="84" role="img" viewBox="0 0 96 96"
+                        width="84">
+                        <title>When you share photos, they will appear on your profile.</title>
+                        <circle cx="48" cy="48" fill="none" r="47" stroke="currentColor" stroke-miterlimit="10"
+                            stroke-width="2"></circle>
+                        <ellipse cx="48.002" cy="49.524" fill="none" rx="10.444" ry="10.476" stroke="currentColor"
+                            stroke-linejoin="round" stroke-width="2.095"></ellipse>
+                        <path
+                            d="M63.994 69A8.02 8.02 0 0 0 72 60.968V39.456a8.023 8.023 0 0 0-8.01-8.035h-1.749a4.953 4.953 0 0 1-4.591-3.242C56.61 25.696 54.859 25 52.469 25h-8.983c-2.39 0-4.141.695-5.181 3.178a4.954 4.954 0 0 1-4.592 3.242H32.01a8.024 8.024 0 0 0-8.012 8.035v21.512A8.02 8.02 0 0 0 32.007 69Z"
+                            fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                    <h2 class="text-[20px]">No posts to show...</h2>
+                </div>
+                <!-- <div class="posts w-full my-5 min-h-[50%]">
+                    <div class="flex w-full justify-center flex-wrap gap-4">
+                        <div class="post w-[30%]">
+                            <img src="/post1.jpg" class="w-full" alt="">
+                        </div>
+                        <div class="post w-[30%]">
+                            <img src="/post2.jpg" class="w-full" alt="">
+                        </div>
+                        <div class="post w-[30%]">
+                            <img src="/post1.jpg" class="w-full" alt="">
+                        </div>
+                        <div class="post w-[30%]">
+                            <img src="/post2.jpg" class="w-full" alt="">
+                        </div>
+                        <div class="post w-[30%]">
+                            <img src="/post1.jpg" class="w-full" alt="">
+                        </div>
+                        <div class="post w-[30%]">
+                            <img src="/post2.jpg" class="w-full" alt="">
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+        <div
+            class="postSmt hidden opacity-0 justify-center items-center w-full h-full  absolute top-0 left-0 backdrop-blur-[6px]">
+            <div class="w-[45%] postContainer scale-0 p-3 bg-white rounded-md">
+                <div class="flex items-center gap-3">
+                    <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
+                        class="w-10 h-10 rounded-full object-cover object-top " alt="">
+                    <div class="names text-zinc-950 flex flex-col justify-center">
+                        <p class="text-[13px]">
+                            <%= user.name %>
+                        </p>
+                        <select id="viewToggle" name="viewToggle"
+                            class="bg-transparent ml-[-4px] text-[10px] text-zinc-500 text-nowrap border-none outline-none focus:ring-0 focus:border-transparent">
+                            <option class="bg-black text-white">Following</option>
+                            <option class="bg-black text-white">Everyone</option>
+                        </select>
+                    </div>
+                    <i class="fa-solid  fa-xmark ml-auto text-black text-[20px] hover:text-red-500"></i>
+                </div>
+                <textarea
+                    class="w-full min-h-[45px] h-[250px] max-h-[300px] outline-none text-zinc-950 bg-zinc-100 rounded-md mt-4 p-2"
+                    name="" placeholder="Whats in your mind..." id=""></textarea>
+                <div class="flex gap-5 mt-3 text-zinc-950">
+                    <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                            class="fa-solid fa-image text-blue-500"></i><span>Images/Videos</span></div>
+                    <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                            class="fa-solid fa-link text-orange-500"></i><span>Attatchment</span></div>
+                    <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                            class="fa-solid fa-video text-red-500"></i><span>Live</span>
+                    </div>
+                    <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                            class="fa-solid fa-hashtag text-zinc-500"></i><span>Hashtags</span>
+                    </div>
+                </div>
+                <button class="w-full bg-zinc-950 text-white mt-5 py-2 rounded-md">Share</button>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+            integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="/javascripts/app.js"></script>
+</body>
+
+
+</html>

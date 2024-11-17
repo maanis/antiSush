@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Document</title>
+    <script>
+        // JavaScript function to preview images
+        function previewImage(event, previewId) {
+            console.log(event, previewId);
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    console.log(e)
+                    document.getElementById(previewId).src = e.target.result;
+                    document.getElementById(previewId).style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-zinc-950 w-full text-white flex">
+
+
+    <%- include('./partials/sidebar') %>
+
+        <div class="w-[85%] py-6 h-full">
+            <form action="/editProfile" method="post" enctype="multipart/form-data">
+                <div class="w-[60%] mx-auto h-full p-4">
+                    <h3 class=" text-[22px] font-semibold">Edit Profile</h3>
+                    <div class="mt-6 w-full flex items-center gap-4 bg-zinc-900 rounded-lg p-3">
+                        <div class="flex items-center justify-between gap-4">
+                            <input type="file" id="profilePicture" name="profile" accept="image/*"
+                                onchange="previewImage(event, 'profilePreview')"
+                                class=" p-2 order-2 rounded-md text-gray-400 focus:outline-none">
+                            <img id="profilePreview" src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
+                                alt="Profile Picture Preview"
+                                class="order-1 w-12 h-12 rounded-full object-cover mx-auto">
+                        </div>
+
+                    </div>
+                    <h3 class="mt-6 text-[18px] font-semibold">Username:</h3>
+                    <input class="mt-2 w-full bg-zinc-900 rounded-lg p-2 outline-none px-3" name="username"
+                        value="<%= user.username %>" placeholder="Enter your username" type="text">
+                    <h3 class="mt-6 text-[18px] font-semibold">Name:</h3>
+                    <input class="mt-2 w-full bg-zinc-900 rounded-lg p-2 outline-none px-3" name="name"
+                        value="<%= user.name %>" placeholder="Enter your name" type="text">
+                    <h3 class="mt-6 text-[18px] font-semibold">Bio:</h3>
+                    <textarea placeholder="Write your bio..." name="bio"
+                        class="min-h-20 mt-2 max-h-32 outline-none w-full bg-zinc-900 rounded-lg p-4"
+                        id=""><%= user.bio %></textarea>
+
+                    <div class="w-full flex justify-end mt-7">
+                        <input type="submit" class="px-8 rounded-lg  py-1 bg-white font-semibold text-zinc-900"
+                            value="Update">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+            integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="app.js"></script>
+</body>
+
+
+</html>

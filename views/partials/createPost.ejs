@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.querySelector('.fa-xmark').addEventListener('click', () => {
+            console.log('hii')
+        })
+    </script>
+</head>
+
+<body>
+    <div
+        class="postSmt hidden opacity-0 justify-center items-center w-full h-full  absolute top-0 left-0 backdrop-blur-[6px]">
+        <div class="w-[45%] postContainer scale-0 p-3 bg-white rounded-md">
+            <div class="flex items-center gap-3">
+                <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
+                    class="w-10 h-10 rounded-full object-cover object-top " alt="">
+                <div class="names text-zinc-950 flex flex-col justify-center">
+                    <p class="text-[13px]">
+                        <%= user.name %>
+                    </p>
+                    <select id="viewToggle" name="viewToggle"
+                        class="bg-transparent ml-[-4px] text-[10px] text-zinc-500 text-nowrap border-none outline-none focus:ring-0 focus:border-transparent">
+                        <option class="bg-black text-white">Following</option>
+                        <option class="bg-black text-white">Everyone</option>
+                    </select>
+                </div>
+                <i class="fa-solid  fa-xmark ml-auto text-black text-[20px] hover:text-red-500"></i>
+            </div>
+            <textarea
+                class="w-full min-h-[45px] h-[250px] max-h-[300px] outline-none text-zinc-950 bg-zinc-100 rounded-md mt-4 p-2"
+                name="" placeholder="Whats in your mind..." id=""></textarea>
+            <div class="flex gap-5 mt-3 text-zinc-950">
+                <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                        class="fa-solid fa-image text-blue-500"></i><span>Images/Videos</span></div>
+                <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                        class="fa-solid fa-link text-orange-500"></i><span>Attatchment</span></div>
+                <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                        class="fa-solid fa-video text-red-500"></i><span>Live</span>
+                </div>
+                <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                        class="fa-solid fa-hashtag text-zinc-500"></i><span>Hashtags</span>
+                </div>
+            </div>
+            <a href="/hii"><button class="w-full bg-zinc-950 text-white mt-5 py-2 rounded-md">Share</button></a>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/javascripts/app.js"></script>
+
+    <!-- <script src="/javascripts/app.js"></script> -->
+</body>
+
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+
+<body class="bg-zinc-950 text-white">
+    <div class="flex w-full justify-between px-8 h-[55px] bg-zinc-800 items-center">
+        <div class="flex items-center gap-24 max-lg:gap-12 max-[1024px]:gap-8 max-md:gap-3">
+            <div class="logo"><span class="font-semibold">We</span>Share</div>
+            <div class="input relative">
+                <i class="fas fa-search absolute max-md:hidden text-zinc-400 left-2 top-1/2 -translate-y-1/2"></i>
+                <input
+                    class="p-1 outline-none w-[450px] max-lg:w-[385px] max-[1024px]:w-[260px] max-md:hidden bg-zinc-950 rounded-md pl-8"
+                    placeholder="Search" type="text" />
+            </div>
+        </div>
+        <div class="items flex items-center gap-4">
+            <i
+                class="fa-solid w-8 h-8 max-md:w-4 max-md:h-4 flex justify-center items-center bg-zinc-950 rounded-md fa-bell"></i>
+            <a href="/save"><i
+                    class="fa-solid w-8 h-8 max-md:w-4 max-md:h-4 flex justify-center items-center bg-zinc-950 rounded-md fa-bookmark"></i></a>
+            <div class="logo">
+                <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
+                    class="w-7 rounded-full h-7 object-cover object-top" alt="" />
+            </div>
+            <div class="name max-[1024px]:text-sm max-md:hidden cursor-pointer">
+                Admin
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <a href="/logout" class="bg-zinc-800 text-red-500">Logout</a>
+        </div>
+    </div>
+
+    <div class="flex hero w-full gap-4 p-4 max-[1024px]:p-3">
+        <div
+            class="box-a w-[15%] max-[1024px]:w-[45px] max-md:fixed max-md:w-full bottom-0 left-0 max-md:h-[6%] h-full flex flex-col gap-4 rounded-md">
+            <a href="/profile"
+                class="a h-[30%] max-[1305px]:h-[25%] max-[1272px]:h-[22%] max-[1024px]:h-[45px] max-[1024px]:rounded-full w-full max-md:hidden bg-zinc-800 rounded-md p-2 max-[1024px]:p-0">
+                <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
+                    class="w-full h-full hidden max-[1024px]:block rounded-full max-md:hidden object-cover object-top"
+                    alt="" />
+
+                <div class="h-full relative bg-zinc-900 p-2 max-[1305px]:p:3 max-[1024px]:hidden rounded-md">
+                    <div
+                        class="hidden max-[1335px]:flex gap-4 max-[1305px]:gap-2 max-[1305px]:items-center tracking-tight max-[1305px]:tracking-normal">
+                        <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
+                            class="w-12 h-12 max-[1305px]:w-7 max-[1305px]:h-7 rounded-full object-cover object-top"
+                            alt="" />
+                        <div class="names">
+                            <h3
+                                class="font-semibold max-[1305px]:font-normal max-[1305px]:text-sm max-[1126px]:text-[12px]">
+                                <%=user.name %>
+                            </h3>
+                            <p class="text-zinc-300 max-[1305px]:text-xs max-[1126px]:text-[10px]">
+                                <%=user.username %>
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="hidden max-[1335px]:flex justify-center flex-wrap gap-4 max-[1305px]:gap-3 mt-7 max-[1305px]:mt-4 max-[1126px]:gap-1 items-center max-[1020px]:mt-1">
+                        <div class="text-center">
+                            <p class="font-semibold max-[1305px]:font-normal max-[1335px]:text-[11px]">
+                                <%=user.followers %>
+                            </p>
+                            <p class="text-zinc-300 max-[1335px]:text-[9px]">Followers</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="font-semibold max-[1305px]:font-normal max-[1335px]:text-[11px]">
+                                <%=user.followings %>
+                            </p>
+                            <p class="text-zinc-300 max-[1335px]:text-[9px]">Followings</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="font-semibold max-[1305px]:font-normal max-[1335px]:text-[11px]">
+                                <%=user.posts.length %>
+                            </p>
+                            <p class="text-zinc-300 max-[1335px]:text-[9px]">Posts</p>
+                        </div>
+                    </div>
+                    <div class="imgs h-full max-[1335px]:hidden">
+                        <div class="cover w-full h-[45%] rounded-md">
+                            <img class="h-[100%] w-full object-cover rounded-md object-top bg-cover"
+                                src="data:image/png;base64,<%= user.coverPhoto.toString('base64') %>" alt="" />
+                            <img class="w-11 h-11 object-cover rounded-full object-top absolute top-[55%] left-5 -translate-y-[55%]"
+                                src="data:image/png;base64,<%= user.pfp.toString('base64') %>" alt="" />
+                            <div class="texts left-20 absolute">
+                                <h2 class="text-[13px]">
+                                    <%=user.name %>
+                                </h2>
+                                <p class="text-[11px] text-zinc-300">
+                                    <%=user.username %>
+                                </p>
+                            </div>
+                            <div
+                                class="flex justify-center flex-wrap gap-5  max-[1305px]:gap-4 mt-12 max-[1305px]:mt-4 items-center">
+                                <div class="text-center">
+                                    <p
+                                        class="font-semibold text-[11px] max-[1305px]:font-normal max-[1305px]:text-[xs]">
+                                        <%=user.followers %>
+                                    </p>
+                                    <p class="text-zinc-300 text-[10px] max-[1305px]:text-xs">
+                                        Followers
+                                    </p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="font-semibold text-[11px] max-[1305px]:font-normal max-[1305px]:text-sm">
+                                        <%=user.followings %>
+                                    </p>
+                                    <p class="text-zinc-300 text-[10px] max-[1305px]:text-xs">
+                                        Followings
+                                    </p>
+                                </div>
+                                <div class="text-center">
+                                    <p class="font-semibold text-[11px] max-[1305px]:font-normal max-[1305px]:text-sm">
+                                        <%=user.posts.length %>
+                                    </p>
+                                    <p class="text-zinc-300 text-[10px] max-[1305px]:text-xs">
+                                        Posts
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <div
+                class="b h-[60%] max-lg:h-[65%] max-[1024px]:h-[94%] max-md:bg-zinc-950 max-md:w-full max-md:h-[60px] max-[480px]:h-[50px] max-md:absolute max-md:bottom-0 max-md:rounded-none p-3 max-[1305px]:p-2 max-[1024px]:p-0 bg-zinc-800 rounded-md overflow-y-scroll max-md:overflow-visible">
+                <div class="flex flex-col max-md:h-full">
+                    <ul
+                        class="flex flex-col max-md:flex-row gap-2 max-md:justify-evenly max-md:items-center max-md:h-full">
+                        <li
+                            class="w-full cursor-pointer max-md:w-auto max-md:order-1 flex max-lg:text-sm items-center px-3 py-2 max-lg:py-3 text-zinc800 bg-zinc-900 max-[1024px]:justify-center max-md:bg-zinc-950">
+                            <i
+                                class="fa-solid max-md:text-[22px] max-[480px]:text-[18px] max-lg:text-[17px] text-zinc800 bg-zinc-800 fa-house text-[12px] w-6 max-[1024px]:w-auto"></i><span
+                                class="max-[1024px]:hidden">Feed</span>
+                        </li>
+                        <li
+                            class="w-full cursor-pointer max-md:w-auto flex max-lg:text-sm max-md:order-2 items-center px-3 py-2 max-lg:py-3 text-zinc-300 rounded-md max-[1024px]:justify-center">
+                            <i
+                                class="fa-regular max-md:text-[22px] max-[480px]:text-[18px] max-lg:text-[17px] fa-compass text-zinc-300 text-[12px] w-6 max-[1024px]:w-auto"></i><span
+                                class="max-[1024px]:hidden">Explore</span>
+                        </li>
+                        <li
+                            class="w-full cursor-pointer max-md:w-auto flex max-lg:text-sm max-md:order-5 max-sm:hidden items-center px-3 py-2 max-lg:py-3 text-zinc-300 rounded-md max-[1024px]:justify-center">
+                            <i
+                                class="fa-regular max-md:text-[22px] max-[480px]:text-[18px] max-lg:text-[17px] fa-comment-dots text-zinc-300 text-[12px] w-6 max-[1024px]:w-auto"></i><span
+                                class="max-[1024px]:hidden">Messages</span>
+                        </li>
+                        <li
+                            class="w-full cursor-pointer max-md:w-auto flex max-lg:text-sm max-md:order-4 items-center px-3 py-2 max-lg:py-3 text-zinc-300 rounded-md max-[1024px]:justify-center">
+                            <i
+                                class="fa-solid max-md:text-[22px] max-[480px]:text-[18px] max-lg:text-[17px] fa-video text-zinc-300 text-[12px] w-6 max-[1024px]:w-auto"></i><span
+                                class="max-[1024px]:hidden">Reels</span>
+                        </li>
+                        <li
+                            class="w-full cursor-pointer max-md:hidden max-md:w-auto flex max-lg:text-sm items-center px-3 py-2 max-lg:py-3 text-zinc-300 rounded-md max-[1024px]:justify-center">
+                            <i
+                                class="fa-solid max-md:text-[22px] max-[480px]:text-[18px] max-lg:text-[17px] fa-globe text-zinc-300 text-[12px] w-6 max-[1024px]:w-auto"></i><span
+                                class="max-[1024px]:hidden">Interests</span>
+                        </li>
+                        <li
+                            class="w-full cursor-pointer max-md:hidden max-md:w-auto flex max-lg:text-sm items-center px-3 py-2 max-lg:py-3 text-zinc-300 rounded-md max-[1024px]:justify-center">
+                            <i
+                                class="fa-solid max-md:text-[22px] max-[480px]:text-[18px] max-lg:text-[17px] fa-bell text-zinc-300 text-[12px] w-6 max-[1024px]:w-auto"></i><span
+                                class="max-[1024px]:hidden">Notifications</span>
+                        </li>
+                        <li
+                            class="w-full cursor-pointer createPost max-md:w-auto flex max-lg:text-sm max-md:order-3 items-center px-3 py-2 max-lg:py-3 text-zinc-300 rounded-md max-[1024px]:justify-center">
+                            <i
+                                class="fa-solid max-md:text-[22px] max-[480px]:text-[18px] max-lg:text-[17px] fa-circle-plus text-zinc-300 text-[12px] w-6 max-[1024px]:w-auto"></i><span
+                                class="max-[1024px]:hidden">Create</span>
+                        </li>
+                        <li
+                            class="w-full cursor-pointer  max-md:w-auto hidden max-sm:flex max-lg:text-sm max-md:order-5 items-center px-3 py-2 max-lg:py-3 text-zinc-300 rounded-md max-[1024px]:justify-center">
+                            <i
+                                class="fa-solid max-md:text-[22px] max-[480px]:text-[18px] max-lg:text-[17px] fa-search text-zinc-300 text-[12px] w-6 max-[1024px]:w-auto"></i><span
+                                class="max-[1024px]:hidden">search</span>
+                        </li>
+                    </ul>
+                    <div
+                        class="seperation max-lg:hidden max-md:hidden h-[1px] max-[1024px]:mt-2 bg-zinc-300 w-[80%] flex justify-center relative left-1/2 -translate-x-1/2">
+                    </div>
+                    <p class="text-zinc-300 px-3 mt-3 text-[12px] uppercase max-[1024px]:hidden">
+                        Pages You Like
+                    </p>
+                    <ul class="flex max-lg:hidden flex-col gap-2 mt-1 max-md:hidden max-[1024px]:mt-2">
+                        <li
+                            class="w-full cursor-pointer flex max-lg:text-sm items-center px-3 py-2 rounded-md max-[1024px]:p-2 max-[1024px]:justify-center">
+                            <i
+                                class="fa-brands max-lg:text-[17px] fa-uikit text-zinc-300 text-[12px] w-6 max-[1024px]:w-auto"></i><span
+                                class="max-[1024px]:hidden">UI/UX</span>
+                        </li>
+                        <li
+                            class="w-full cursor-pointer flex max-lg:text-sm items-center px-3 py-2 rounded-md max-[1024px]:p-2 max-[1024px]:justify-center">
+                            <i
+                                class="fa-solid max-lg:text-[17px] fa-code text-zinc-300 text-[12px] w-6 max-[1024px]:w-auto"></i><span
+                                class="max-[1024px]:hidden">Web Desgner</span>
+                        </li>
+                        <li
+                            class="w-full cursor-pointer flex max-lg:text-sm items-center px-3 py-2 rounded-md max-[1024px]:p-2 max-[1024px]:justify-center">
+                            <i
+                                class="fa-brands max-lg:text-[17px] fa-dribbble text-zinc-300 text-[12px] w-6 max-[1024px]:w-auto"></i><span
+                                class="max-[1024px]:hidden">Dribble Community</span>
+                        </li>
+                        <li
+                            class="w-full cursor-pointer flex max-lg:text-sm items-center px-3 py-2 rounded-md max-[1024px]:p-2 max-[1024px]:justify-center">
+                            <i
+                                class="fa-brands max-lg:text-[17px] fa-behance text-zinc-300 text-[12px] w-6 max-[1024px]:w-auto"></i><span
+                                class="max-[1024px]:hidden">Behance</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div
+                class="links max-[1024px]:hidden flex flex-wrap gap-x-4 gap-y-2 items-center text-zinc-300 text-[12px]">
+                <p>Privacy Terms</p>
+                <p>Advertizing</p>
+                <p>Cookies</p>
+                <p>Platform &copy; 2024</p>
+            </div>
+        </div>
+
+        <div
+            class="box-b w-[65%] overflow-y-scroll max-md:h-[200vh] max-[1024px]:w-[94%] max-md:w-[100%] flex flex-col items-center gap-4 h-full rounded-md">
+            <div
+                class="c h-[15%] w-full max-lg:w-[65%] max-md:w-[80%] max-sm:w-full max-lg:bg-zinc-900 bg-zinc-800 max-md:h-[65px] items-center scroll-container rounded-md flex px-3">
+                <div class="flex h-fullitems-center gap-3 w-auto shrink-0">
+                    <div class="pfp">
+                        <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                    <div class="pfp">
+                        <img src="/images/pfp (2).jpg"
+                            class="w-[65px] max-lg:h-[55px] rounded-full h-[65px] max-lg:w-[55px] object-cover"
+                            alt="" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="d h-[85%] flex flex-col max-lg:w-[65%] max-md:w-[80%] max-lg:bg-zinc-950
+                w-full bg-zinc-950 rounded-md">
+                <div class="w-full h-[25%] max-lg:hidden p-3 bg-zinc-800 rounded-md">
+                    <div class="flex items-center justify-center gap-4">
+                        <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
+                            class="w-10 h-10 rounded-full object-cover object-top" alt="">
+                        <input type="text" placeholder="whats on your mind..." readonly
+                            class="createPost outline-none w-[75%] py-2 max-lg:w-[385px] max-[1024px]:w-[260px] max-md:hidden bg-zinc-950 rounded-md pl-4"
+                            name="" id="">
+                        <button class="text-zinc-950 bg-white px-5 py-2 rounded-md text-nowrap">Share Post</button>
+                    </div>
+                    <div class="flex gap-5 px-5 mt-3">
+                        <div class="flex items-center gap-1"><i
+                                class="fa-solid fa-image text-blue-500"></i><span>Images/Videos</span></div>
+                        <div class="flex items-center gap-1"><i
+                                class="fa-solid fa-link text-orange-500"></i><span>Attatchment</span></div>
+                        <div class="flex items-center gap-1"><i
+                                class="fa-solid fa-video text-red-500"></i><span>Live</span>
+                        </div>
+                        <div class="flex items-center gap-1"><i
+                                class="fa-solid fa-hashtag text-zinc-300"></i><span>Hashtags</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center mt-2 max-md:hidden">
+                    <div class="seperation w-full  h-[1px]  bg-zinc-700 "></div>
+                    <div class="select flex gap-1">
+                        <p class="text-nowrap text-zinc-400 ml-1 max-lg:text-[11px]">sort by:</p>
+                        <select id="viewToggle" name="viewToggle"
+                            class="bg-transparent max-lg:text-[13px] text-white border-none outline-none focus:ring-0 focus:border-transparent">
+                            <option class="bg-black text-white">Following</option>
+                            <option class="bg-black text-white">Everyone</option>
+                        </select>
+
+                    </div>
+
+
+
+                </div>
+                <div class="main w-full min-h-[73%] bg-zinc-800 max-lg:bg-zinc-950 mt-2  rounded-md">
+
+                    <div class="flex flex-col gap-4 w-full h-full justify-center items-center">
+                        <svg aria-label="When you share photos, they will appear on your profile."
+                            class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="112" role="img"
+                            viewBox="0 0 96 96" width="112">
+                            <title>When you share photos, they will appear on your profile.</title>
+                            <circle cx="48" cy="48" fill="none" r="47" stroke="currentColor" stroke-miterlimit="10"
+                                stroke-width="2"></circle>
+                            <ellipse cx="48.002" cy="49.524" fill="none" rx="10.444" ry="10.476" stroke="currentColor"
+                                stroke-linejoin="round" stroke-width="2.095"></ellipse>
+                            <path
+                                d="M63.994 69A8.02 8.02 0 0 0 72 60.968V39.456a8.023 8.023 0 0 0-8.01-8.035h-1.749a4.953 4.953 0 0 1-4.591-3.242C56.61 25.696 54.859 25 52.469 25h-8.983c-2.39 0-4.141.695-5.181 3.178a4.954 4.954 0 0 1-4.592 3.242H32.01a8.024 8.024 0 0 0-8.012 8.035v21.512A8.02 8.02 0 0 0 32.007 69Z"
+                                fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
+                        <h2 class="text-[24px]">No posts to show...</h2>
+                    </div>
+
+                    <!-- <div class="post flex flex-col w-[60%] px-1 mx-auto mb-2 mt-4">
+                        <div class="box-a flex items-center gap-2">
+                            <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
+                                class="w-10 h-10 object-cover object-top rounded-full" alt="">
+                            <div class="dets">
+                                <h3 class="text-[16px]">username</h3>
+                                <p class="text-[12px] text-zinc-300">14 nov, 2024</p>
+                            </div>
+                            <i class="fa-solid fa-ellipsis ml-auto"></i>
+                        </div>
+                        <div class="box-b w-full border mt-2 flex justify-center border-zinc-600  ">
+                            <img src="/images/pfp.jpg" class="" alt="">
+                        </div>
+                        <div class="box-c flex items-center gap-5 mt-3">
+                            <div class="flex gap-1 items-center text-[14px]"><i
+                                    class="fa-regular fa-heart"></i><span>Like</span>
+                            </div>
+                            <div class="flex gap-1 items-center text-[14px]"><i
+                                    class="fa-regular fa-comment"></i><span>Comment</span></div>
+                            <div class="flex gap-1 items-center text-[14px]"><i
+                                    class="fa-regular fa-paper-plane"></i><span>Share</span></div>
+                            <i class="ml-auto fa-regular fa-bookmark"></i>
+                        </div>
+                    </div>
+
+                    <div class="post flex flex-col w-[60%] px-1 mx-auto mb-2 mt-4">
+                        <div class="box-a flex items-center gap-2">
+                            <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
+                                class="w-10 h-10 object-cover object-top rounded-full" alt="">
+                            <div class="dets">
+                                <h3 class="text-[16px]">username</h3>
+                                <p class="text-[12px] text-zinc-300">14 nov, 2024</p>
+                            </div>
+                            <i class="fa-solid fa-ellipsis ml-auto"></i>
+                        </div>
+                        <div class="box-b w-full border mt-2 flex justify-center border-zinc-600  ">
+                            <img src="data:image/png;base64,<%= user.coverPhoto.toString('base64') %>" class="" alt="">
+                        </div>
+                        <div class="box-c flex items-center gap-5 mt-3">
+                            <div class="flex gap-1 items-center text-[14px]"><i
+                                    class="fa-regular fa-heart"></i><span>Like</span>
+                            </div>
+                            <div class="flex gap-1 items-center text-[14px]"><i
+                                    class="fa-regular fa-comment"></i><span>Comment</span></div>
+                            <div class="flex gap-1 items-center text-[14px]"><i
+                                    class="fa-regular fa-paper-plane"></i><span>Share</span></div>
+                            <i class="ml-auto fa-regular fa-bookmark"></i>
+                        </div>
+                    </div>
+
+                    <div class="post flex flex-col w-[60%] px-1 mx-auto mb-2 mt-4">
+                        <div class="box-a flex items-center gap-2">
+                            <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
+                                class="w-10 h-10 object-cover object-top rounded-full" alt="">
+                            <div class="dets">
+                                <h3 class="text-[16px]">username</h3>
+                                <p class="text-[12px] text-zinc-300">14 nov, 2024</p>
+                            </div>
+                            <i class="fa-solid fa-ellipsis ml-auto"></i>
+                        </div>
+                        <div class="box-b w-full border mt-2 flex justify-center border-zinc-600  ">
+                            <img src="/images/pfp.jpg" class="" alt="">
+                        </div>
+                        <div class="box-c flex items-center gap-5 mt-3">
+                            <div class="flex gap-1 items-center text-[14px]"><i
+                                    class="fa-regular fa-heart"></i><span>Like</span>
+                            </div>
+                            <div class="flex gap-1 items-center text-[14px]"><i
+                                    class="fa-regular fa-comment"></i><span>Comment</span></div>
+                            <div class="flex gap-1 items-center text-[14px]"><i
+                                    class="fa-regular fa-paper-plane"></i><span>Share</span></div>
+                            <i class="ml-auto fa-regular fa-bookmark"></i>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+
+        <div class="box-c max-lg:hidden flex flex-col gap-4 w-[20%] max-md:hidden h-full rounded-md">
+            <div class="article h-[65%] overflow-y-auto">
+                <a href="<%= data.url %>">
+                    <div class="e h-full bg-zinc-800 rounded-md p-2 w-full">
+                        <div class="img h-[45%]">
+                            <img src="<%= data.urlToImage %>" class="w-full h-full object-cover" alt="">
+                        </div>
+                        <p class="w-full text-[16px] mt-2">
+                            <%= data.content %>
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <button class="bg-white refresh px-3 py-1 rounded-md text-zinc-950 font-semibold ">Refresh <i
+                    class="fa-solid fa-arrows-rotate"></i></button>
+            <div class="f h-[35%] p-3 flex flex-col gap-4 bg-zinc-800 rounded-md">
+                <h2 class="font-bold">Suggestions</h2>
+                <div class="flex items-center gap-3">
+                    <img src="/images/ronaldo.webp" class="rounded-full w-10 h-10 object-cover " alt="">
+                    <p>Cristiano</p>
+                    <button class="bg-white ml-auto text-zinc-950 px-3 py-1 rounded-lg">Follow</button>
+                </div>
+                <div class="flex items-center gap-3">
+                    <img src="/images/msd.webp" class="rounded-full w-10 h-10 object-cover " alt="">
+                    <p>Dhoni</p>
+                    <button class="bg-white ml-auto text-zinc-950 px-3 py-1 rounded-lg">Follow</button>
+                </div>
+                <div class="flex items-center gap-3">
+                    <img src="/images/vk.jpg" class="rounded-full w-10 h-10 object-cover " alt="">
+                    <p>Virat</p>
+                    <button class="bg-white ml-auto text-zinc-950 px-3 py-1 rounded-lg">Follow</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div
+        
+    class="postSmt hidden opacity-0 justify-center items-center w-full h-full  absolute top-0 left-0 backdrop-blur-[6px]">
+        <div class="w-[45%] postContainer scale-0 p-3 bg-white rounded-md">
+            <div class="flex items-center gap-3">
+                <img src="/images/pfp (2).jpg" class="w-10 h-10 rounded-full object-cover object-top " alt="">
+                <div class="names text-zinc-950 flex flex-col justify-center">
+                    <p class="text-[13px]">Manish Jha</p>
+                    <select id="viewToggle" name="viewToggle"
+                        class="bg-transparent ml-[-4px] text-[10px] text-zinc-500 text-nowrap border-none outline-none focus:ring-0 focus:border-transparent">
+                        <option class="bg-black text-white">Following</option>
+                        <option class="bg-black text-white">Everyone</option>
+                    </select>
+                </div>
+                <i class="fa-solid  fa-xmark ml-auto text-black text-[20px] hover:text-red-500"></i>
+            </div>
+            <textarea
+                class="w-full min-h-[45px] h-[250px] max-h-[300px] outline-none text-zinc-950 bg-zinc-100 rounded-md mt-4 p-2"
+                name="" placeholder="Whats in your mind..." id=""></textarea>
+            <div class="flex gap-5 mt-3 text-zinc-950">
+                <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                        class="fa-solid fa-image text-blue-500"></i><span>Images/Videos</span></div>
+                <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                        class="fa-solid fa-link text-orange-500"></i><span>Attatchment</span></div>
+                <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                        class="fa-solid fa-video text-red-500"></i><span>Live</span>
+                </div>
+                <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                        class="fa-solid fa-hashtag text-zinc-500"></i><span>Hashtags</span>
+                </div>
+            </div>
+            <button class="w-full bg-zinc-950 text-white mt-5 py-2 rounded-md">Share</button>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+        integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/javascripts/app.js"></script>
+    <script src="/javascripts/script.js"></script>
+
+</body>
+
+</html>

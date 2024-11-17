@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Setup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script>
+        // JavaScript function to preview images
+        function previewImage(event, previewId) {
+            console.log(event, previewId);
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    console.log(e)
+                    document.getElementById(previewId).src = e.target.result;
+                    document.getElementById(previewId).style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-zinc-950 text-white h-screen flex justify-center items-center">
+    <div class="b bg-zinc-900 p-6 rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/2 overflow-y-auto h-[85%]">
+        <h1 class="text-2xl font-bold text-center mb-6">Complete Your Profile</h1>
+        <form action="/profile-setup" method="POST" enctype="multipart/form-data">
+            <!-- Name -->
+            <div class="mb-4">
+                <label for="name" class="block mb-2 text-sm font-semibold">Full Name</label>
+                <input type="text" id="name" name="name"
+                    class="w-full p-3 rounded-md bg-zinc-800 placeholder-gray-400 focus:outline-none"
+                    placeholder="Enter your name" required>
+            </div>
+
+            <!-- Profile Picture -->
+            <div class="mb-4">
+                <label for="profilePicture" class="block mb-2 text-sm font-semibold">Profile Picture</label>
+                <div class="flex items-center gap-4">
+                    <input type="file" id="profilePicture" name="profile" accept="image/*"
+                        onchange="previewImage(event, 'profilePreview')"
+                        class="w-full p-2 order-2 rounded-md text-gray-400 focus:outline-none">
+                    <img id="profilePreview" src="/images/defaultPfp.png" alt="Profile Picture Preview"
+                        class="order-1 w-14 h-14 rounded-full object-cover mx-auto">
+                </div>
+            </div>
+
+            <!-- Cover Photo -->
+            <div class="mb-4">
+                <label for="coverPhoto" class="block mb-2 text-sm font-semibold">Cover Photo</label>
+                <input type="file" id="coverPhoto" name="profile" accept="image/*"
+                    onchange="previewImage(event, 'coverPreview')"
+                    class="w-full p-2 bg-zinc-800 rounded-md text-gray-400 focus:outline-none">
+                <img id="coverPreview" src="#" alt="Cover Photo Preview" class="mt-4 w-full h-40 object-cover hidden">
+            </div>
+
+            <!-- Bio -->
+            <div class="mb-4">
+                <label for="bio" class="block mb-2 text-sm font-semibold">Bio</label>
+                <textarea id="bio" name="bio" rows="4"
+                    class="w-full p-3 rounded-md bg-zinc-800 placeholder-gray-400 focus:outline-none"
+                    placeholder="Tell us about yourself..."></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600">
+                Save Profile
+            </button>
+        </form>
+    </div>
+</body>
+
+</html>

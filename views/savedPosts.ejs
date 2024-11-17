@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class=" w-full flex h-full  bg-zinc-950 text-white">
+        <!-- Navbar -->
+        <%- include('./partials/sidebar') %>
+
+            <!-- Content -->
+            <div class="b overflow-y-auto w-[85%] mx-auto p-8">
+                <h2 class="text-2xl font-semibold mb-4">Your Saved Posts</h2>
+
+                <!-- If no saved posts -->
+                <!-- Comment this section if you want to show dummy posts -->
+                <!-- 
+          <div class="flex flex-col items-center mt-10">
+            <img src="/images/no-posts.png" alt="No posts" class="w-32 h-32" />
+            <p class="text-gray-400 text-lg mt-4">You have no saved posts yet.</p>
+          </div>
+          -->
+
+                <!-- List of saved posts -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Dummy Post 1 -->
+                    <div class="bg-zinc-800 rounded-lg shadow overflow-hidden">
+                        <img src="https://via.placeholder.com/800x600" alt="Post Image" class="w-full h-auto">
+                    </div>
+
+                    <!-- Dummy Post 2 -->
+                    <div class="bg-zinc-800 rounded-lg shadow overflow-hidden">
+                        <img src="https://via.placeholder.com/800x600" alt="Post Image" class="w-full h-auto">
+                    </div>
+
+                    <!-- Dummy Post 3 -->
+                    <div class="bg-zinc-800 rounded-lg shadow overflow-hidden">
+                        <img src="https://via.placeholder.com/800x600" alt="Post Image" class="w-full h-auto">
+                    </div>
+                    <div class="bg-zinc-800 rounded-lg shadow overflow-hidden">
+                        <img src="https://via.placeholder.com/800x600" alt="Post Image" class="w-full h-auto">
+                    </div>
+                    <div class="bg-zinc-800 rounded-lg shadow overflow-hidden">
+                        <img src="https://via.placeholder.com/800x600" alt="Post Image" class="w-full h-auto">
+                    </div>
+                    <div class="bg-zinc-800 rounded-lg shadow overflow-hidden">
+                        <img src="https://via.placeholder.com/800x600" alt="Post Image" class="w-full h-auto">
+                    </div>
+                    <div class="bg-zinc-800 rounded-lg shadow overflow-hidden">
+                        <img src="https://via.placeholder.com/800x600" alt="Post Image" class="w-full h-auto">
+                    </div>
+
+                    <!-- Add more posts if needed -->
+                    <div class="bg-zinc-800 rounded-lg shadow overflow-hidden">
+                        <img src="https://via.placeholder.com/800x600" alt="Post Image" class="w-full h-auto">
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+
+</body>
+
+</html>
