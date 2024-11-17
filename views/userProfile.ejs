@@ -31,8 +31,14 @@
                                         <%= user.username %>
                                     </p>
                                     <a href="/follow/<%= user._id %>">
-                                        <button
-                                            class="bg-blue-500 px-2 py-1 rounded-md text-zinc-950  text-[14px]">Follow</button>
+                                        <% if (user.followers.indexOf(currentUser._id)===-1) { %>
+                                            <button
+                                                class="bg-blue-500 px-4 py-1 rounded-md text-white  text-[14px]">Follow</button>
+                                            <% } else { %>
+                                                <button
+                                                    class="bg-white px-2 py-1 rounded-md text-zinc-950  text-[14px]">Unfollow</button>
+
+                                                <% }%>
                                     </a>
                                     <button
                                         class="bg-zinc-700 px-2 py-1 rounded-md text-white text-[14px]">Message</button>
@@ -77,14 +83,14 @@
                 <div class="seperation bg-zinc-800 mt-10 h-[1px]  w-full"></div>
 
                 <% if (user.posts.length> 0) { %>
-                    <div class="posts w-full flex my-5 min-h-[50%]">
-                        <div class="flex w-full h-full justify-center flex-wrap gap-4">
+                    <div class="posts  w-full flex my-5 ">
+                        <div class="grid grid-cols-3  gap-4">
                             <% user.posts.forEach((e)=> { %>
-                                <div class="post w-[30%] h-[30%]  ">
-                                    <img src="data:image/png;base64,<%= e.media %>" class="w-full h-full object-cover"
+                                <div class="post ">
+                                    <img src="data:image/png;base64,<%= e.media %>" class="aspect-[1/1] object-cover"
                                         alt="">
                                 </div>
-                                <% }) %> 9920713098
+                                <% }) %>
                         </div>
                     </div>
                     <% } else { %>

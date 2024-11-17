@@ -36,22 +36,38 @@ router.get('/profile', isLoggedIn, async function (req, res, next) {
 })
 
 router.get('/profile/:id', isLoggedIn, async function (req, res, next) {
-
+  let currentUser = req.user
   if (req.user._id.toString() === req.params.id) {
     res.redirect('/profile')
   } else {
     let user = await userModel.findOne({ _id: req.params.id }).populate('posts')
-    res.render('userProfile', { user });
+    res.render('userProfile', { user, currentUser });
   }
 })
 router.get('/follow/:id', isLoggedIn, async function (req, res, next) {
   let currentUser = req.user
   let user = await userModel.findOne({ _id: req.params.id })
-  user.followers.push(currentUser._id)
-  currentUser.followings.push(user._id)
-  await user.save()
-  await currentUser.save()
-  res.redirect(`/profile/${req.params.id}`)
+  const currentUserId = currentUser._id.toString();
+  const userId = user._id.toString();
+
+  const followerIndex = user.followers.map(id => id.toString()).indexOf(currentUserId);
+  const followingIndex = currentUser.followings.map(id => id.toString()).indexOf(userId);
+
+  if (followerIndex === -1) {
+    // Not following, so follow
+    user.followers.push(currentUser._id);
+    currentUser.followings.push(user._id);
+  } else {
+    // Already following, so unfollow
+    user.followers.splice(followerIndex, 1);
+    currentUser.followings.splice(followingIndex, 1);
+  }
+
+  await user.save();
+  await currentUser.save();
+
+  res.redirect(`/profile/${req.params.id}`);
+
 })
 router.get('/like/:id', isLoggedIn, async function (req, res, next) {
   let user = req.user

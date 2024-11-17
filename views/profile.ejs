@@ -77,11 +77,12 @@
                 <div class="seperation bg-zinc-800 mt-10 h-[1px]  w-full"></div>
 
                 <% if (user.posts.length> 0) { %>
-                    <div class="posts bgre6 w-full flex my-5 min-h-[50%]">
-                        <div class="flex flex-wrap w-full h-full gap-4">
+                    <div class="posts  w-full flex my-5 ">
+                        <div class="grid grid-cols-3  gap-4">
                             <% user.posts.forEach((e)=> { %>
                                 <div class="post ">
-                                    <img src="data:image/png;base64,<%= e.media %>" class="h-52 object-cover" alt="">
+                                    <img src="data:image/png;base64,<%= e.media %>" class="aspect-[1/1] object-cover"
+                                        alt="">
                                 </div>
                                 <% }) %>
                         </div>
