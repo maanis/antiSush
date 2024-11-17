@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const postModel = mongoose.Schema({
-    content: String,
+    caption: String,
     media: String,
     createdAt: {
         type: Date,
@@ -26,7 +26,7 @@ const postModel = mongoose.Schema({
             content: String
         },
     ],
-    
+
 })
 
 module.exports = mongoose.model('post', postModel);

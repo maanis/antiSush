@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var userModel = require('../models/userModel')
+var postModel = require('../models/postModel')
 const upload = require('../configs/multer')
+const dayJs = require('dayjs')
 const { signup, login, logout } = require('../controllers/authController');
 const isLoggedIn = require('../controllers/isLoggedIn');
 const { closeDelimiter } = require('ejs');
@@ -18,17 +20,19 @@ router.get('/home', isLoggedIn, async function (req, res, next) {
   let data = await resp.json()
   var num = Math.floor(Math.random() * 100) + 1;
 
+  let posts = await postModel.find().populate('user')
 
   let user = req.user
-  res.render('home', { user, data: data.articles[num] });
+  res.render('home', { user, posts, dayJs });
 })
 
 router.get('/setup', isLoggedIn, function (req, res, next) {
   res.render('profileSetup');
 })
 
-router.get('/profile', isLoggedIn, function (req, res, next) {
-  res.render('profile', { user: req.user });
+router.get('/profile', isLoggedIn, async function (req, res, next) {
+  let user = await userModel.findOne({ email: req.user.email }).populate('posts')
+  res.render('profile', { user });
 })
 
 router.get('/edit', isLoggedIn, function (req, res, next) {
@@ -63,6 +67,22 @@ router.post('/editProfile', isLoggedIn, upload.single('profile'), async function
   await user.save()
   res.redirect('profile')
 })
+
+router.post('/mediaupload', isLoggedIn, upload.single('media'), async function (req, res, next) {
+  let user = req.user
+  let post = await postModel.create({
+    user: req.user._id,
+    caption: req.body.caption,
+    // media: req.file.buffer.toString('base64')
+  })
+  if (req.file) {
+    post.media = req.file.buffer.toString('base64')
+  }
+  await post.save()
+  user.posts.push(post._id)
+  await user.save()
+  res.redirect('home')
+});
 
 
 

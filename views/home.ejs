@@ -359,98 +359,70 @@
 
 
                 </div>
-                <div class="main w-full min-h-[73%] bg-zinc-800 max-lg:bg-zinc-950 mt-2  rounded-md">
+                <div class="main w-full  bg-zinc-800 max-lg:bg-zinc-950 mt-2  rounded-md">
 
-                    <div class="flex flex-col gap-4 w-full h-full justify-center items-center">
-                        <svg aria-label="When you share photos, they will appear on your profile."
-                            class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="112" role="img"
-                            viewBox="0 0 96 96" width="112">
-                            <title>When you share photos, they will appear on your profile.</title>
-                            <circle cx="48" cy="48" fill="none" r="47" stroke="currentColor" stroke-miterlimit="10"
-                                stroke-width="2"></circle>
-                            <ellipse cx="48.002" cy="49.524" fill="none" rx="10.444" ry="10.476" stroke="currentColor"
-                                stroke-linejoin="round" stroke-width="2.095"></ellipse>
-                            <path
-                                d="M63.994 69A8.02 8.02 0 0 0 72 60.968V39.456a8.023 8.023 0 0 0-8.01-8.035h-1.749a4.953 4.953 0 0 1-4.591-3.242C56.61 25.696 54.859 25 52.469 25h-8.983c-2.39 0-4.141.695-5.181 3.178a4.954 4.954 0 0 1-4.592 3.242H32.01a8.024 8.024 0 0 0-8.012 8.035v21.512A8.02 8.02 0 0 0 32.007 69Z"
-                                fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path>
-                        </svg>
-                        <h2 class="text-[24px]">No posts to show...</h2>
-                    </div>
+                    <% if (posts.length> 0) { %>
+                        <% posts.reverse().forEach((e)=> { %>
+                            <div class="post flex flex-col w-[60%] px-1 mx-auto mb-2 mt-4">
+                                <div class="box-a flex items-center gap-2">
+                                    <a href="/profile/<%=e.user._id %>">
+                                        <img src="data:image/png;base64,<%= e.user.pfp.toString('base64') %>"
+                                            class="w-10 h-10 object-cover object-top rounded-full" alt="">
+                                    </a>
+                                    <div class="dets">
+                                        <a href="/profile/<%=e.user._id %>">
+                                            <h3 class="text-[16px]">
+                                                <%= e.user.username %>
+                                            </h3>
+                                        </a>
+                                        <p class="text-[12px] text-zinc-300">
+                                            <%= dayJs(e.createdAt).format('h:mm A, D MMM, YYYY') %>
+                                        </p>
+                                    </div>
+                                    <i class="fa-solid fa-ellipsis ml-auto"></i>
+                                </div>
+                                <% if (e.media) { %>
+                                    <div class="box-b w-full border mt-2 flex justify-center border-zinc-600  ">
+                                        <img src="data:image/png;base64,<%= e.media.toString('base64') %>" class=""
+                                            alt="">
+                                    </div>
+                                    <% } %>
+                                        <h2 class="mt-2">
+                                            <%= e.caption %>
+                                        </h2>
+                                        <div class="box-c flex items-center gap-5 mt-3">
+                                            <div class="flex gap-1 items-center text-[14px]"><i
+                                                    class="fa-regular fa-heart"></i><span>Like</span>
+                                            </div>
+                                            <div class="flex gap-1 items-center text-[14px]"><i
+                                                    class="fa-regular fa-comment"></i><span>Comment</span></div>
+                                            <div class="flex gap-1 items-center text-[14px]"><i
+                                                    class="fa-regular fa-paper-plane"></i><span>Share</span></div>
+                                            <i class="ml-auto fa-regular fa-bookmark"></i>
+                                        </div>
+                            </div>
+                            <% }) %>
+                                <% }else { %>
+                                    <div class="flex flex-col gap-4 w-full h-full justify-center items-center">
+                                        <svg aria-label="When you share photos, they will appear on your profile."
+                                            class="x1lliihq x1n2onr6 x5n08af" fill="currentColor" height="112"
+                                            role="img" viewBox="0 0 96 96" width="112">
+                                            <title>When you share photos, they will appear on your profile.</title>
+                                            <circle cx="48" cy="48" fill="none" r="47" stroke="currentColor"
+                                                stroke-miterlimit="10" stroke-width="2"></circle>
+                                            <ellipse cx="48.002" cy="49.524" fill="none" rx="10.444" ry="10.476"
+                                                stroke="currentColor" stroke-linejoin="round" stroke-width="2.095">
+                                            </ellipse>
+                                            <path
+                                                d="M63.994 69A8.02 8.02 0 0 0 72 60.968V39.456a8.023 8.023 0 0 0-8.01-8.035h-1.749a4.953 4.953 0 0 1-4.591-3.242C56.61 25.696 54.859 25 52.469 25h-8.983c-2.39 0-4.141.695-5.181 3.178a4.954 4.954 0 0 1-4.592 3.242H32.01a8.024 8.024 0 0 0-8.012 8.035v21.512A8.02 8.02 0 0 0 32.007 69Z"
+                                                fill="none" stroke="currentColor" stroke-linejoin="round"
+                                                stroke-width="2">
+                                            </path>
+                                        </svg>
+                                        <h2 class="text-[24px]">No posts to show...</h2>
+                                    </div>
+                                    <%} %>
 
-                    <!-- <div class="post flex flex-col w-[60%] px-1 mx-auto mb-2 mt-4">
-                        <div class="box-a flex items-center gap-2">
-                            <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
-                                class="w-10 h-10 object-cover object-top rounded-full" alt="">
-                            <div class="dets">
-                                <h3 class="text-[16px]">username</h3>
-                                <p class="text-[12px] text-zinc-300">14 nov, 2024</p>
-                            </div>
-                            <i class="fa-solid fa-ellipsis ml-auto"></i>
-                        </div>
-                        <div class="box-b w-full border mt-2 flex justify-center border-zinc-600  ">
-                            <img src="/images/pfp.jpg" class="" alt="">
-                        </div>
-                        <div class="box-c flex items-center gap-5 mt-3">
-                            <div class="flex gap-1 items-center text-[14px]"><i
-                                    class="fa-regular fa-heart"></i><span>Like</span>
-                            </div>
-                            <div class="flex gap-1 items-center text-[14px]"><i
-                                    class="fa-regular fa-comment"></i><span>Comment</span></div>
-                            <div class="flex gap-1 items-center text-[14px]"><i
-                                    class="fa-regular fa-paper-plane"></i><span>Share</span></div>
-                            <i class="ml-auto fa-regular fa-bookmark"></i>
-                        </div>
-                    </div>
-
-                    <div class="post flex flex-col w-[60%] px-1 mx-auto mb-2 mt-4">
-                        <div class="box-a flex items-center gap-2">
-                            <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
-                                class="w-10 h-10 object-cover object-top rounded-full" alt="">
-                            <div class="dets">
-                                <h3 class="text-[16px]">username</h3>
-                                <p class="text-[12px] text-zinc-300">14 nov, 2024</p>
-                            </div>
-                            <i class="fa-solid fa-ellipsis ml-auto"></i>
-                        </div>
-                        <div class="box-b w-full border mt-2 flex justify-center border-zinc-600  ">
-                            <img src="data:image/png;base64,<%= user.coverPhoto.toString('base64') %>" class="" alt="">
-                        </div>
-                        <div class="box-c flex items-center gap-5 mt-3">
-                            <div class="flex gap-1 items-center text-[14px]"><i
-                                    class="fa-regular fa-heart"></i><span>Like</span>
-                            </div>
-                            <div class="flex gap-1 items-center text-[14px]"><i
-                                    class="fa-regular fa-comment"></i><span>Comment</span></div>
-                            <div class="flex gap-1 items-center text-[14px]"><i
-                                    class="fa-regular fa-paper-plane"></i><span>Share</span></div>
-                            <i class="ml-auto fa-regular fa-bookmark"></i>
-                        </div>
-                    </div>
-
-                    <div class="post flex flex-col w-[60%] px-1 mx-auto mb-2 mt-4">
-                        <div class="box-a flex items-center gap-2">
-                            <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
-                                class="w-10 h-10 object-cover object-top rounded-full" alt="">
-                            <div class="dets">
-                                <h3 class="text-[16px]">username</h3>
-                                <p class="text-[12px] text-zinc-300">14 nov, 2024</p>
-                            </div>
-                            <i class="fa-solid fa-ellipsis ml-auto"></i>
-                        </div>
-                        <div class="box-b w-full border mt-2 flex justify-center border-zinc-600  ">
-                            <img src="/images/pfp.jpg" class="" alt="">
-                        </div>
-                        <div class="box-c flex items-center gap-5 mt-3">
-                            <div class="flex gap-1 items-center text-[14px]"><i
-                                    class="fa-regular fa-heart"></i><span>Like</span>
-                            </div>
-                            <div class="flex gap-1 items-center text-[14px]"><i
-                                    class="fa-regular fa-comment"></i><span>Comment</span></div>
-                            <div class="flex gap-1 items-center text-[14px]"><i
-                                    class="fa-regular fa-paper-plane"></i><span>Share</span></div>
-                            <i class="ml-auto fa-regular fa-bookmark"></i>
-                        </div>
-                    </div> -->
 
                 </div>
             </div>
@@ -458,19 +430,19 @@
 
         <div class="box-c max-lg:hidden flex flex-col gap-4 w-[20%] max-md:hidden h-full rounded-md">
             <div class="article h-[65%] overflow-y-auto">
-                <a href="<%= data.url %>">
+                <!-- <a href="">
                     <div class="e h-full bg-zinc-800 rounded-md p-2 w-full">
                         <div class="img h-[45%]">
-                            <img src="<%= data.urlToImage %>" class="w-full h-full object-cover" alt="">
+                            <img src="" class="w-full h-full object-cover" alt="">
                         </div>
                         <p class="w-full text-[16px] mt-2">
-                            <%= data.content %>
+                            
                         </p>
                     </div>
-                </a>
+                </a> -->
             </div>
-            <button class="bg-white refresh px-3 py-1 rounded-md text-zinc-950 font-semibold ">Refresh <i
-                    class="fa-solid fa-arrows-rotate"></i></button>
+            <!-- <button class="bg-white refresh px-3 py-1 rounded-md text-zinc-950 font-semibold ">Refresh <i
+                    class="fa-solid fa-arrows-rotate"></i></button> -->
             <div class="f h-[35%] p-3 flex flex-col gap-4 bg-zinc-800 rounded-md">
                 <h2 class="font-bold">Suggestions</h2>
                 <div class="flex items-center gap-3">
@@ -501,8 +473,7 @@
 
 
     <div
-        
-    class="postSmt hidden opacity-0 justify-center items-center w-full h-full  absolute top-0 left-0 backdrop-blur-[6px]">
+        class="postSmt hidden opacity-0 justify-center items-center w-full h-full  absolute top-0 left-0 backdrop-blur-[6px]">
         <div class="w-[45%] postContainer scale-0 p-3 bg-white rounded-md">
             <div class="flex items-center gap-3">
                 <img src="/images/pfp (2).jpg" class="w-10 h-10 rounded-full object-cover object-top " alt="">
@@ -516,22 +487,26 @@
                 </div>
                 <i class="fa-solid  fa-xmark ml-auto text-black text-[20px] hover:text-red-500"></i>
             </div>
-            <textarea
-                class="w-full min-h-[45px] h-[250px] max-h-[300px] outline-none text-zinc-950 bg-zinc-100 rounded-md mt-4 p-2"
-                name="" placeholder="Whats in your mind..." id=""></textarea>
-            <div class="flex gap-5 mt-3 text-zinc-950">
-                <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
-                        class="fa-solid fa-image text-blue-500"></i><span>Images/Videos</span></div>
-                <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
-                        class="fa-solid fa-link text-orange-500"></i><span>Attatchment</span></div>
-                <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
-                        class="fa-solid fa-video text-red-500"></i><span>Live</span>
+            <form action="/mediaupload" method="post" enctype="multipart/form-data">
+                <textarea
+                    class="w-full min-h-[45px] h-[250px] max-h-[300px] outline-none text-zinc-950 bg-zinc-100 rounded-md mt-4 p-2"
+                    name="caption" placeholder="Whats in your mind..." id=""></textarea>
+                <div class="flex gap-5 mt-3 text-zinc-950">
+                    <input type="file" name="media" id='media' class="hidden">
+                    <div onclick="document.querySelector('#media').click()"
+                        class="flex cursor-pointer  bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                            class="fa-solid fa-image text-blue-500"></i><span>Images/Videos</span></div>
+                    <div class="flex cursor-pointer bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                            class="fa-solid fa-link text-orange-500"></i><span>Attatchment</span></div>
+                    <div class="flex cursor-pointer bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                            class="fa-solid fa-video text-red-500"></i><span>Live</span>
+                    </div>
+                    <div class="flex cursor-pointer bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
+                            class="fa-solid fa-hashtag text-zinc-500"></i><span>Hashtags</span>
+                    </div>
                 </div>
-                <div class="flex bg-zinc-100 rounded-md px-2 py-1  items-center gap-1"><i
-                        class="fa-solid fa-hashtag text-zinc-500"></i><span>Hashtags</span>
-                </div>
-            </div>
-            <button class="w-full bg-zinc-950 text-white mt-5 py-2 rounded-md">Share</button>
+                <input type="submit" value="Share" class="w-full bg-zinc-950 text-white mt-5 py-2 rounded-md">
+            </form>
         </div>
     </div>
 
@@ -541,7 +516,7 @@
         integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/javascripts/app.js"></script>
-    <script src="/javascripts/script.js"></script>
+    <!-- <script src="/javascripts/script.js"></script> -->
 
 </body>
 
