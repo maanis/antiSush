@@ -386,7 +386,30 @@
                                             <%= dayJs(e.createdAt).format('h:mm A, D MMM, YYYY') %>
                                         </p>
                                     </div>
-                                    <i class="fa-solid fa-ellipsis ml-auto"></i>
+                                    <a class="ml-auto relative dot cursor-pointer">
+                                        <i class="fa-solid fa-ellipsis ml-auto"></i>
+                                        <div 
+                                            class="fixed ellipsisContainer hidden inset-0 backdrop-blur-[6px]  items-center justify-center ">
+                                            <div
+                                                class="w-80 bg-zinc-900 rounded-md shadow-lg divide-y divide-zinc-700 text-center">
+                                                <button
+                                                    class="w-full rounded-t-md py-3 text-red-500 font-medium hover:bg-zinc-800">Report</button>
+                                                <button
+                                                    class="w-full  py-3 text-red-500 font-medium hover:bg-zinc-800">Unfollow</button>
+                                                <button class="w-full  py-3 text-white font-medium hover:bg-zinc-800">Go
+                                                    to post</button>
+                                                <button
+                                                    class="w-full  py-3 text-white font-medium hover:bg-zinc-800">Share
+                                                    to...</button>
+                                                <button
+                                                    class="w-full  py-3 text-white font-medium hover:bg-zinc-800">Copy
+                                                    link</button>
+                                                <button onclick="hide()"
+                                                    class="w-full cancel rounded-b-md py-3 text-white font-medium hover:bg-zinc-800">Cancel</button>
+                                            </div>
+                                        </div>
+
+                                    </a>
                                 </div>
                                 <% if (e.media) { %>
                                     <div class="box-b w-full border mt-2 flex justify-center border-zinc-600  ">
@@ -470,19 +493,19 @@
 
         <div class="box-c max-lg:hidden flex flex-col gap-4 w-[20%] max-md:hidden h-full rounded-md">
             <div class="article h-[65%] overflow-y-auto">
-                <a href="<%=data.articles[num].url %>">
+                <!-- <a href="">
                     <div class="e h-full bg-zinc-800 rounded-md p-2 w-full">
                         <div class="img h-[45%]">
-                            <img src="<%= data.articles[num].urlToImage %>" class="w-full h-full object-cover" alt="">
+                            <img src="" class="w-full h-full object-cover" alt="">
                         </div>
                         <p class="w-full text-[16px] mt-2">
-                            <%=data.articles[num].content %>
+
                         </p>
                     </div>
-                </a>
+                </a> -->
             </div>
-            <button class="bg-white refresh px-3 py-1 rounded-md text-zinc-950 font-semibold ">Refresh <i
-                    class="fa-solid fa-arrows-rotate"></i></button>
+            <!-- <button class="bg-white refresh px-3 py-1 rounded-md text-zinc-950 font-semibold ">Refresh <i
+                    class="fa-solid fa-arrows-rotate"></i></button> -->
             <div class="f h-[35%] p-3 flex flex-col gap-4 bg-zinc-800 rounded-md">
                 <h2 class="font-bold">Suggestions</h2>
                 <div class="flex items-center gap-3">
@@ -549,6 +572,8 @@
             </form>
         </div>
     </div>
+
+
 
 
     <script type="text/javascript">

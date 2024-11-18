@@ -15,15 +15,15 @@ router.get('/', function (req, res, next) {
 
 
 router.get('/home', isLoggedIn, async function (req, res, next) {
-  let url = 'https://newsapi.org/v2/everything?q=keyword&apiKey=6947e50511f340feba0d0b9a0cad0e93'
-  let resp = await fetch(url)
-  let data = await resp.json()
-  var num = Math.floor(Math.random() * 100) + 1;
+  // let url = 'https://newsapi.org/v2/everything?q=keyword&apiKey=6947e50511f340feba0d0b9a0cad0e93'
+  // let resp = await fetch(url)
+  // let data = await resp.json()
+  // var num = Math.floor(Math.random() * 100) + 1;
 
   let posts = await postModel.find().populate('user')
 
   let user = req.user
-  res.render('home', { user, posts, dayJs, data, num });
+  res.render('home', { user, posts, dayJs });
 })
 
 router.get('/setup', isLoggedIn, function (req, res, next) {
@@ -92,6 +92,11 @@ router.get('/save/:id', isLoggedIn, async function (req, res, next) {
   await user.save()
   res.redirect('/home')
 })
+
+// router.get('/check/:id', isLoggedIn, async function (req, res, next) {
+//   let user = req.user
+
+// })
 
 
 
