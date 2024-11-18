@@ -6,15 +6,16 @@ const cont = document.querySelectorAll('.ellipsisContainer')
 
 dot.forEach((elem, id) => {
     elem.addEventListener('click', () => {
+        console.log(cont[id])
         cont[id].style.display = 'flex'
     })
 })
 cancel.forEach((elem, id) => {
-    // console.log(elem)
-
     elem.addEventListener('click', () => {
+        console.log(cont[id])
         gsap.to(cont[id], {
-            display: 'none'
+            display: 'none',
+
         })
     })
 })

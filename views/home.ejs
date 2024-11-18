@@ -388,26 +388,52 @@
                                     </div>
                                     <a class="ml-auto relative dot cursor-pointer">
                                         <i class="fa-solid fa-ellipsis ml-auto"></i>
-                                        <div 
-                                            class="fixed ellipsisContainer hidden inset-0 backdrop-blur-[6px]  items-center justify-center ">
+                                        <% if (user.posts.indexOf(e._id) !==-1) { %>
                                             <div
-                                                class="w-80 bg-zinc-900 rounded-md shadow-lg divide-y divide-zinc-700 text-center">
-                                                <button
-                                                    class="w-full rounded-t-md py-3 text-red-500 font-medium hover:bg-zinc-800">Report</button>
-                                                <button
-                                                    class="w-full  py-3 text-red-500 font-medium hover:bg-zinc-800">Unfollow</button>
-                                                <button class="w-full  py-3 text-white font-medium hover:bg-zinc-800">Go
-                                                    to post</button>
-                                                <button
-                                                    class="w-full  py-3 text-white font-medium hover:bg-zinc-800">Share
-                                                    to...</button>
-                                                <button
-                                                    class="w-full  py-3 text-white font-medium hover:bg-zinc-800">Copy
-                                                    link</button>
-                                                <button onclick="hide()"
-                                                    class="w-full cancel rounded-b-md py-3 text-white font-medium hover:bg-zinc-800">Cancel</button>
+                                                class="fixed ellipsisContainer hidden inset-0 backdrop-blur-[6px]  items-center justify-center ">
+                                                <div
+                                                    class="w-80 bg-zinc-900 rounded-md shadow-lg divide-y divide-zinc-700 text-center">
+                                                    <button
+                                                        class="w-full rounded-t-md py-3 text-red-500 font-medium hover:bg-zinc-800">Edit</button>
+                                                    <button
+                                                        class="w-full  py-3 text-red-500 font-medium hover:bg-zinc-800">Delete</button>
+                                                    <button
+                                                        class="w-full  py-3 text-white font-medium hover:bg-zinc-800">Go
+                                                        to post</button>
+                                                    <button
+                                                        class="w-full  py-3 text-white font-medium hover:bg-zinc-800">Share
+                                                        to...</button>
+                                                    <button
+                                                        class="w-full  py-3 text-white font-medium hover:bg-zinc-800">Copy
+                                                        link</button>
+                                                    <button
+                                                        class="w-full cancel rounded-b-md py-3 text-white font-medium hover:bg-zinc-800">Cancel</button>
+                                                </div>
                                             </div>
-                                        </div>
+                                            <% } else { %>
+                                                <div
+                                                    class="fixed ellipsisContainer hidden inset-0 backdrop-blur-[6px]  items-center justify-center ">
+                                                    <div
+                                                        class="w-80 bg-zinc-900 rounded-md shadow-lg divide-y divide-zinc-700 text-center">
+                                                        <button
+                                                            class="w-full rounded-t-md py-3 text-red-500 font-medium hover:bg-zinc-800">Report</button>
+                                                        <button
+                                                            class="w-full  py-3 text-red-500 font-medium hover:bg-zinc-800">Unfollow</button>
+                                                        <button
+                                                            class="w-full  py-3 text-white font-medium hover:bg-zinc-800">Go
+                                                            to post</button>
+                                                        <button
+                                                            class="w-full  py-3 text-white font-medium hover:bg-zinc-800">Share
+                                                            to...</button>
+                                                        <button
+                                                            class="w-full  py-3 text-white font-medium hover:bg-zinc-800">Copy
+                                                            link</button>
+                                                        <button
+                                                            class="w-full cancel rounded-b-md py-3 text-white font-medium hover:bg-zinc-800">Cancel</button>
+                                                    </div>
+                                                </div>
+                                                <% }%>
+
 
                                     </a>
                                 </div>
