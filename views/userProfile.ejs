@@ -85,7 +85,7 @@
                 <% if (user.posts.length> 0) { %>
                     <div class="posts  w-full flex my-5 ">
                         <div class="grid grid-cols-3  gap-4">
-                            <% user.posts.forEach((e)=> { %>
+                            <% user.posts.reverse().forEach((e)=> { %>
                                 <div class="post ">
                                     <img src="data:image/png;base64,<%= e.media %>" class="aspect-[1/1] object-cover"
                                         alt="">

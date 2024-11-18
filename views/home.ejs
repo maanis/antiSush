@@ -19,7 +19,7 @@
         <div class="flex items-center gap-24 max-lg:gap-12 max-[1024px]:gap-8 max-md:gap-3">
             <div class="logo font text-[20px] flex items-center">
                 <img src="/images/logo.png" class="w-12" alt="">
-                <span class="font font-thin">We</span>Share
+                antiSosh
             </div>
             <div class="input relative">
                 <i class="fas fa-search absolute max-md:hidden text-zinc-400 left-2 top-1/2 -translate-y-1/2"></i>
@@ -33,10 +33,12 @@
                 class="fa-solid w-8 h-8 max-md:w-4 max-md:h-4 flex justify-center items-center bg-zinc-950 rounded-md fa-bell"></i>
             <a href="/save"><i
                     class="fa-solid w-8 h-8 max-md:w-4 max-md:h-4 flex justify-center items-center bg-zinc-950 rounded-md fa-bookmark"></i></a>
-            <div class="logo">
-                <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
-                    class="w-7 rounded-full h-7 object-cover object-top" alt="" />
-            </div>
+            <a href="/profile">
+                <div class="logo">
+                    <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
+                        class="w-7 rounded-full h-7 object-cover object-top" alt="" />
+                </div>
+            </a>
             <div class="name max-[1024px]:text-sm max-md:hidden cursor-pointer">
                 Admin
                 <i class="fa-solid fa-chevron-down"></i>
@@ -392,9 +394,7 @@
                                             alt="">
                                     </div>
                                     <% } %>
-                                        <h2 class="mt-2">
-                                            <%= e.caption %>
-                                        </h2>
+
                                         <div class="box-c flex items-center gap-5 mt-3">
                                             <a href="/like/<%=e._id %>">
                                                 <div class="flex gap-1 cursor-pointer items-center text-[20px]">
@@ -422,9 +422,24 @@
 
                                             </a>
                                         </div>
-                                        <div class="flex gap-2 mt-2 text-[14px]"><span>
+                                        <div class="flex gap-1 mt-2 text-[14px]">
+
+                                            <span>
                                                 <%=e.likes.length %>
-                                            </span><span>Likes</span></div>
+                                            </span>
+                                            <span>Likes</span>
+                                        </div>
+
+                                        <% if (e.caption) { %>
+                                            <h2 class="mt-1">
+                                                <span class="font-bold">
+                                                    <%= e.user.username %>
+                                                </span>
+                                                <span class="font-thin text-zinc-300 ml-1">
+                                                    <%= e.caption %>
+                                                </span>
+                                            </h2>
+                                            <% } %>
                             </div>
                             <% }) %>
                                 <% }else { %>
@@ -455,19 +470,19 @@
 
         <div class="box-c max-lg:hidden flex flex-col gap-4 w-[20%] max-md:hidden h-full rounded-md">
             <div class="article h-[65%] overflow-y-auto">
-                <!-- <a href="">
+                <a href="<%=data.articles[num].url %>">
                     <div class="e h-full bg-zinc-800 rounded-md p-2 w-full">
                         <div class="img h-[45%]">
-                            <img src="" class="w-full h-full object-cover" alt="">
+                            <img src="<%= data.articles[num].urlToImage %>" class="w-full h-full object-cover" alt="">
                         </div>
                         <p class="w-full text-[16px] mt-2">
-                            
+                            <%=data.articles[num].content %>
                         </p>
                     </div>
-                </a> -->
+                </a>
             </div>
-            <!-- <button class="bg-white refresh px-3 py-1 rounded-md text-zinc-950 font-semibold ">Refresh <i
-                    class="fa-solid fa-arrows-rotate"></i></button> -->
+            <button class="bg-white refresh px-3 py-1 rounded-md text-zinc-950 font-semibold ">Refresh <i
+                    class="fa-solid fa-arrows-rotate"></i></button>
             <div class="f h-[35%] p-3 flex flex-col gap-4 bg-zinc-800 rounded-md">
                 <h2 class="font-bold">Suggestions</h2>
                 <div class="flex items-center gap-3">
@@ -554,7 +569,7 @@
         integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/javascripts/app.js"></script>
-    <!-- <script src="/javascripts/script.js"></script> -->
+    <script src="/javascripts/script.js"></script>
 
 </body>
 

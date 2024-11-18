@@ -23,7 +23,7 @@ router.get('/home', isLoggedIn, async function (req, res, next) {
   let posts = await postModel.find().populate('user')
 
   let user = req.user
-  res.render('home', { user, posts, dayJs });
+  res.render('home', { user, posts, dayJs, data, num });
 })
 
 router.get('/setup', isLoggedIn, function (req, res, next) {
@@ -119,12 +119,12 @@ router.post('/profile-setup', isLoggedIn, upload.array('profile', 2), async func
 })
 
 router.post('/editProfile', isLoggedIn, upload.single('profile'), async function (req, res, next) {
+  let user = req.user
   const { username, name, bio } = req.body;
   console.log(req.body)
   if (req.file) {
     user.pfp = req.file.buffer
   }
-  let user = req.user
   user.name = name
   user.bio = bio
   user.username = username

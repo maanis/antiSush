@@ -28,7 +28,7 @@
 
                 <% if (user.saves.length> 0) { %>
                     <div class="flex flex-wrap gap-6">
-                        <% user.saves.forEach((e)=> { %>
+                        <% user.saves.reverse().forEach((e)=> { %>
                             <img src="data:image/png;base64,<%= e.media %>" alt="Post Image"
                                 class=" h-52 object-cover rounded-lg shadow">
                             <% }) %>
