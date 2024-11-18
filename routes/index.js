@@ -81,6 +81,15 @@ router.get('/like/:id', isLoggedIn, async function (req, res, next) {
   }
   res.redirect('/home')
 })
+
+router.get('/delete/:id', isLoggedIn, async function (req, res, next) {
+  let user = req.user
+  const result = await postModel.findByIdAndDelete(req.params.id)
+  const index = user.posts.indexOf(req.params.id)
+  user.posts.splice(index, 1)
+  await user.save()
+  res.redirect('/home')
+})
 router.get('/save/:id', isLoggedIn, async function (req, res, next) {
   let user = req.user
   let post = await postModel.findOne({ _id: req.params.id })
