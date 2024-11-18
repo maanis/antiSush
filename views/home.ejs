@@ -394,27 +394,27 @@
                                         <div
                                             class="w-80 bg-zinc-900 rounded-md shadow-lg divide-y divide-zinc-700 text-center">
                                             <% if (user.posts.indexOf(e._id) !==-1) { %>
-                                                <a
-                                                    class="w-full inline-block rounded-t-md py-3 text-red-500 font-medium hover:bg-zinc-700">Edit</a>
+                                                <a href="/edit/<%=e._id %>"
+                                                    class="w-full inline-block cursor-pointer rounded-t-md py-3 text-red-500 font-medium hover:bg-zinc-700">Edit</a>
                                                 <a href="/delete/<%= e._id %>"
-                                                    class="w-full inline-block py-3 text-red-500 font-medium hover:bg-zinc-700">Delete</a>
+                                                    class="w-full inline-block cursor-pointer py-3 text-red-500 font-medium hover:bg-zinc-700">Delete</a>
                                                 <% } else { %>
                                                     <a
-                                                        class="w-full inline-block rounded-t-md py-3 text-red-500 font-medium hover:bg-zinc-800">Report</a>
+                                                        class="w-full inline-block cursor-pointer rounded-t-md py-3 text-red-500 font-medium hover:bg-zinc-800">Report</a>
                                                     <a
-                                                        class="w-full inline-block  py-3 text-red-500 font-medium hover:bg-zinc-800">Unfollow</a>
+                                                        class="w-full inline-block cursor-pointer  py-3 text-red-500 font-medium hover:bg-zinc-800">Unfollow</a>
                                                     <% }%>
                                                         <a
-                                                            class="w-full inline-block  py-3 text-white font-medium hover:bg-zinc-800">Go
+                                                            class="w-full inline-block cursor-pointer  py-3 text-white font-medium hover:bg-zinc-800">Go
                                                             to post</a>
                                                         <a
-                                                            class="w-full inline-block  py-3 text-white font-medium hover:bg-zinc-800">Share
+                                                            class="w-full inline-block cursor-pointer  py-3 text-white font-medium hover:bg-zinc-800">Share
                                                             to...</a>
                                                         <a
-                                                            class="w-full inline-block  py-3 text-white font-medium hover:bg-zinc-800">Copy
+                                                            class="w-full inline-block cursor-pointer  py-3 text-white font-medium hover:bg-zinc-800">Copy
                                                             link</a>
                                                         <a
-                                                            class="w-full inline-block cancel rounded-b-md py-3 text-white font-medium hover:bg-zinc-800">Cancel</a>
+                                                            class="w-full inline-block cursor-pointer cancel rounded-b-md py-3 text-white font-medium hover:bg-zinc-800">Cancel</a>
                                         </div>
                                     </div>
 

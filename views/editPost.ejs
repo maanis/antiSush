@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Info Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-red bg-zinc-950  text-white h-screen w-full flex justify-center items-center">
+    <!-- Main Container -->
+    <div class="flex h-[75%] w-[65%] rounded-md">
+        <!-- Image Section -->
+        <div class=" h-full  bg-black flex justify-center items-center">
+            <img src="data:image/png;base64,<%= post.media.toString('base64') %>"
+                class="w-full rounded-l-md object-cover h-full" alt="">
+        </div>
+
+        <!-- Edit Info Section -->
+        <div class="w-96 rounded-r-md min-h-[75%] bg-[#1e1e1e] p-4 flex flex-col">
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-4">
+                <a href="/home" class="text-sm text-red-600 hover:text-red-700">Cancel</a>
+                <h3 class="text-lg font-semibold">Edit info</h3>
+                <button class="text-blue-500 hover:text-blue-600 font-medium">Done</button>
+            </div>
+
+            <!-- User Info -->
+            <div class="flex items-center gap-3 mb-4">
+                <img src="data:image/png;base64,<%= post.user.pfp.toString('base64') %>"
+                    class="w-10 h-10 bg-gray-700 rounded-full object-cover" alt="">
+                <span class="font-semibold">
+                    <%= post.user.username %>
+                </span>
+            </div>
+
+            <!-- Caption Section -->
+            <textarea
+                class="w-full p-2 bg-[#1e1e1e] border-b border-gray-600 text-white placeholder-gray-400 focus:outline-none"
+                rows="4" placeholder="Add a caption..." maxlength="200"><%= post.caption %></textarea>
+            <div class="text-right text-xs text-gray-400 mt-1">0/200</div>
+
+            <!-- Buttons -->
+            <div class="mt-6 space-y-3">
+                <button
+                    class="flex items-center justify-between w-full bg-[#2a2a2a] px-4 py-3 rounded hover:bg-[#373737]">
+                    <span>Add location</span>
+                    <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16.88 3.549a9 9 0 11-7.765 0A7.503 7.503 0 0012 21v-6m0-6v-4m0 0h-3m3 0h3"></path>
+                    </svg>
+                </button>
+                <button
+                    class="flex items-center justify-between w-full bg-[#2a2a2a] px-4 py-3 rounded hover:bg-[#373737]">
+                    <span>Add collaborators</span>
+                    <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M16 7a4 4 0 01-8 0m8 0a4 4 0 11-8 0m8 0v6m-8-6v6m8 0h2m-2 0H6"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Accessibility Dropdown -->
+            <div class="mt-6">
+                <div class="flex justify-between items-center">
+                    <span>Accessibility</span>
+                    <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 11a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

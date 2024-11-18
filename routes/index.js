@@ -90,6 +90,12 @@ router.get('/delete/:id', isLoggedIn, async function (req, res, next) {
   await user.save()
   res.redirect('/home')
 })
+
+router.get('/edit/:id', isLoggedIn, async function (req, res, next) {
+  let user = req.user
+  const post = await postModel.findOne({ _id: req.params.id }).populate('user')
+  res.render('editPost', { post })
+})
 router.get('/save/:id', isLoggedIn, async function (req, res, next) {
   let user = req.user
   let post = await postModel.findOne({ _id: req.params.id })
