@@ -7,6 +7,7 @@ const cancel = document.querySelectorAll('.cancel')
 const cont = document.querySelectorAll('.ellipsisContainer')
 const comm = document.querySelectorAll('.commentContainer')
 
+
 dot.forEach((elem, id) => {
     elem.addEventListener('click', () => {
         // console.log(cont[id])
