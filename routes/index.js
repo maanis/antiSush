@@ -69,6 +69,32 @@ router.get('/follow/:id', isLoggedIn, async function (req, res, next) {
   res.redirect(`/profile/${req.params.id}`);
 
 })
+router.get('/unfollow/:id', isLoggedIn, async function (req, res, next) {
+  let currentUser = req.user
+  let user = await userModel.findOne({ _id: req.params.id })
+
+  let i = currentUser.followings.indexOf(user._id)
+  let index = user.followers.indexOf(req.params.id)
+  user.followers.splice(index, 1)
+  currentUser.followings.splice(i, 1)
+  await user.save()
+  await currentUser.save()
+  res.redirect('/home')
+
+})
+router.get('/followw/:id', isLoggedIn, async function (req, res, next) {
+  let currentUser = req.user
+  let user = await userModel.findOne({ _id: req.params.id })
+
+  currentUser.followings.push(user._id)
+  user.followers.push(currentUser._id)
+  await user.save()
+  await currentUser.save()
+  res.redirect('/home')
+
+})
+
+
 router.get('/like/:id', isLoggedIn, async function (req, res, next) {
   let user = req.user
   let post = await postModel.findOne({ _id: req.params.id })
@@ -95,6 +121,17 @@ router.get('/edit/:id', isLoggedIn, async function (req, res, next) {
   let user = req.user
   const post = await postModel.findOne({ _id: req.params.id }).populate('user')
   res.render('editPost', { post })
+})
+
+router.post('/editPost/:id', isLoggedIn, upload.single('image'), async function (req, res, next) {
+  let user = req.user
+  const post = await postModel.findOne({ _id: req.params.id }).populate('user')
+
+  post.media = req.file.buffer.toString('base64')
+  post.caption = req.body.caption
+  await post.save()
+  res.redirect('/home')
+  // res.send(req.file)
 })
 router.get('/save/:id', isLoggedIn, async function (req, res, next) {
   let user = req.user
