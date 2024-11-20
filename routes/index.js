@@ -3,7 +3,8 @@ var router = express.Router();
 var userModel = require('../models/userModel')
 var postModel = require('../models/postModel')
 const upload = require('../configs/multer')
-const dayJs = require('dayjs')
+const dayJs = require('dayjs-ext')
+const relativeTime = require('dayjs-ext/plugin/relativeTime')
 const { signup, login, logout } = require('../controllers/authController');
 const isLoggedIn = require('../controllers/isLoggedIn');
 const { closeDelimiter } = require('ejs');
@@ -23,6 +24,7 @@ router.get('/home', isLoggedIn, async function (req, res, next) {
   let posts = await postModel.find().populate('user')
 
   let user = req.user
+  dayJs.extend(relativeTime)
   res.render('home', { user, posts, dayJs });
 })
 
@@ -158,9 +160,21 @@ router.get('/edit', isLoggedIn, function (req, res, next) {
   res.render('editProfile', { user: req.user });
 })
 
+router.post('/comment/:id', isLoggedIn, async function (req, res, next) {
+  let user = req.user;
+  let post = await postModel.findOne({ _id: req.params.id })
+  post.comments.push({
+    user: user._id,
+    content: req.body.comment
+  })
+  await post.save()
+  res.send(post)
+
+})
+
 router.get('/save', isLoggedIn, async function (req, res, next) {
   let user = await userModel.findOne({ email: req.user.email }).populate('saves')
-  console.log(user.saves)
+
   res.render('savedPosts', { user });
 })
 
@@ -178,7 +192,7 @@ router.post('/profile-setup', isLoggedIn, upload.array('profile', 2), async func
 router.post('/editProfile', isLoggedIn, upload.single('profile'), async function (req, res, next) {
   let user = req.user
   const { username, name, bio } = req.body;
-  console.log(req.body)
+
   if (req.file) {
     user.pfp = req.file.buffer
   }

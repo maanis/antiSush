@@ -14,7 +14,7 @@ post.forEach(e => {
     })
 })
 
-document.querySelector('.fa-xmark').addEventListener('click', () => {
+document.querySelector('.closeCreate').addEventListener('click', () => {
     gsap.to('.postContainer', {
         scale: 0,
     })
