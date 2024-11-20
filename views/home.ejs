@@ -421,8 +421,9 @@
                                                                     <a
                                                                         class="w-full inline-block cursor-pointer  py-3 text-white font-medium hover:bg-zinc-800">Copy
                                                                         link</a>
-                                                                    <a
-                                                                        class="w-full inline-block cursor-pointer cancel rounded-b-md py-3 text-white font-medium hover:bg-zinc-800">Cancel</a>
+                                                                    <div
+                                                                        class="w-full inline-block cursor-pointer cancel rounded-b-md py-3 text-white font-medium hover:bg-zinc-800">
+                                                                        Cancel</div>
                                         </div>
                                     </div>
 
@@ -452,7 +453,10 @@
                                                 <i class="fa-regular cursor-pointer fa-comment facomentttt"></i>
                                             </div>
                                             <div
-                                                class="backdrop-blur-[2px] commentContainer absolute top-0 left-0 hidden items-center h-[100vh] w-full text-white">
+                                                class="backdrop-blur-[2px] z-40 commentContainer absolute top-0 left-0 hidden items-center h-[100vh] w-full text-white">
+                                                <i
+                                                    class="fa-solid  fa-xmark closeComment absolute top-8 right-8 text-white text-[24px] hover:text-red-500"></i>
+
                                                 <div class="flex flex-col h-[85%] w-[70%]  md:flex-row  mx-auto py-6">
                                                     <div
                                                         class="h-full relative  bg-gray-900 rounded-l-lg overflow-hidden">
@@ -464,8 +468,10 @@
                                                         class=" w-96 flex flex-col md:w-1/2 bg-zinc-900 rounded-r-lg p-6">
                                                         <header
                                                             class="flex items-center gap-3 pb-4 border-b border-zinc-700">
-                                                            <img src="data:image/png;base64,<%= e.user.pfp.toString('base64') %>"
-                                                                alt="Profile" class="w-8 h-8 object-cover rounded-full">
+                                                            <a href="/profile/<%= e.user.id %>"><img
+                                                                    src="data:image/png;base64,<%= e.user.pfp.toString('base64') %>"
+                                                                    alt="Profile"
+                                                                    class="w-8 h-8 object-cover rounded-full"></a>
                                                             <h1 class="text-[14px] font-bold">@ <%= e.user.username %>
                                                             </h1>
                                                             <a class="ml-auto relative dott cursor-pointer">
@@ -493,8 +499,19 @@
                                                         <div
                                                             class="mt-auto border-t flex-col border-zinc-700 pt-4 flex">
                                                             <div class="flex gap-4">
-                                                                <i class="fa-regular fa-heart"></i>
-                                                                <i class="fa-regular fa-comment"></i>
+                                                                <a href="/like/<%=e._id %>">
+                                                                    <div
+                                                                        class="flex gap-1 cursor-pointer items-center text-[20px]">
+                                                                        <% if (e.likes.indexOf(user._id) !==-1) { %>
+                                                                            <i
+                                                                                class="fa-solid text-red-500 fa-heart"></i>
+                                                                            <% } else { %>
+                                                                                <i class="fa-regular fa-heart"></i>
+
+                                                                                <% } %>
+
+                                                                    </div>
+                                                                </a>
                                                                 <i class="fa-regular fa-paper-plane"></i>
                                                                 <a class="ml-auto" href="/save/<%=e._id %>">
                                                                     <% if (user.saves.indexOf(e._id) !==-1) { %>

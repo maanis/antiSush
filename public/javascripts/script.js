@@ -6,6 +6,7 @@ const dott = document.querySelectorAll('.dott')
 const cancel = document.querySelectorAll('.cancel')
 const cont = document.querySelectorAll('.ellipsisContainer')
 const comm = document.querySelectorAll('.commentContainer')
+const close = document.querySelectorAll('.closeComment')
 
 
 dot.forEach((elem, id) => {
@@ -17,10 +18,7 @@ dot.forEach((elem, id) => {
 cancel.forEach((elem, id) => {
     elem.addEventListener('click', () => {
         // console.log(cont[id])
-        gsap.to(cont[id], {
-            display: 'none',
-
-        })
+        cont[id].style.display = 'none'
     })
 })
 
@@ -38,6 +36,15 @@ dott.forEach((elem, id) => {
     elem.addEventListener('click', () => {
         // console.log(cont[id])
         cont[id].style.display = 'flex'
+        // console.log(elem)
+        // console.log(id)
+    })
+})
+
+close.forEach((elem, id) => {
+    elem.addEventListener('click', () => {
+        // console.log(cont[id])
+        comm[id].style.display = 'none'
         // console.log(elem)
         // console.log(id)
     })
