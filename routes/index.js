@@ -33,7 +33,10 @@ router.get('/setup', isLoggedIn, function (req, res, next) {
 })
 
 router.get('/profile', isLoggedIn, async function (req, res, next) {
-  let user = await userModel.findOne({ email: req.user.email }).populate('posts')
+  // console.log(req.user)
+  // let user = await userModel.findOne({ email: req.user.email }).populate('posts')
+  let user = await req.user.populate('posts')
+  console.log(user)
   res.render('profile', { user });
 })
 
