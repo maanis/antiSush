@@ -499,18 +499,39 @@
 
                                                             </div> -->
                                                             <% if (e.comments.length>0) { %>
-                                                                hii
-                                                                <% } else { %>
-                                                                    <div
-                                                                        class="absolute h-full w-full flex flex-col justify-center items-center">
-                                                                        <h2 class="text-[20px] font-semibold">No
-                                                                            Comments Yet
-                                                                        </h2>
-                                                                        <p class="text-zinc-600 text-[14px]">Start
-                                                                            the
-                                                                            conversation</p>
+
+
+                                                                <% e.comments.reverse().forEach(e=> { %>
+                                                                    <div class="flex items-center mt-4 gap-2">
+                                                                        <img src="data:image/png;base64,<%= e.user.pfp.toString('base64') %>"
+                                                                            class="w-8 h-8 rounded-full object-cover"
+                                                                            alt="">
+                                                                        <p><span class="font-bold">
+                                                                                <%= e.user.username %>
+                                                                            </span></p>
+
+                                                                        <p class="text-zinc-400">
+                                                                            <%= e.content %>
+                                                                        </p>
                                                                     </div>
-                                                                    <% } %>
+                                                                    <span class="text-zinc-500 text-[12px] ml-10">
+                                                                        <%= dayJs(e.createdAt).fromNow() %>
+                                                                    </span>
+
+                                                                    <% }) %>
+                                                                        <% } else { %>
+                                                                            <div
+                                                                                class="absolute h-full w-full flex flex-col justify-center items-center">
+                                                                                <h2 class="text-[20px] font-semibold">
+                                                                                    No
+                                                                                    Comments Yet
+                                                                                </h2>
+                                                                                <p class="text-zinc-600 text-[14px]">
+                                                                                    Start
+                                                                                    the
+                                                                                    conversation</p>
+                                                                            </div>
+                                                                            <% } %>
 
                                                         </div>
 

@@ -9,6 +9,8 @@ const { signup, login, logout } = require('../controllers/authController');
 const isLoggedIn = require('../controllers/isLoggedIn');
 const { closeDelimiter } = require('ejs');
 
+
+
 router.get('/', function (req, res, next) {
   let error = req.flash('error');
   res.render('index', { error });
@@ -21,7 +23,13 @@ router.get('/home', isLoggedIn, async function (req, res, next) {
   // let data = await resp.json()
   // var num = Math.floor(Math.random() * 100) + 1;
 
-  let posts = await postModel.find().populate('user')
+  let posts = await postModel.find()
+    .populate('user')
+    .populate({
+      path: 'comments.user',
+      model: 'user'
+    })
+    .exec();
 
   let user = req.user
   dayJs.extend(relativeTime)
@@ -171,7 +179,7 @@ router.post('/comment/:id', isLoggedIn, async function (req, res, next) {
     content: req.body.comment
   })
   await post.save()
-  res.send(post)
+  res.redirect('/home')
 
 })
 
