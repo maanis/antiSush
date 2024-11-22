@@ -16,7 +16,7 @@
 
     <%- include('./partials/sidebar') %>
 
-        <div class="profile w-[85%] h-full relative overflow-y-auto max-md:w-[100%]">
+        <div class="profile w-[85%] h-full  overflow-y-auto max-md:w-[100%]">
             <div class="imgs w-[50%] h-[50%]  mx-auto ">
                 <div class="imgs w-full h-full">
                     <div class="cover w-full h-[65%] rounded-md">
@@ -130,14 +130,14 @@
 
                                                     <% e.comments.reverse().forEach(e=> { %>
                                                         <div class="flex items-center mt-4 gap-2">
-                                                            <img src="data:image/png;base64,<%= user.pfp.toString('base64') %>"
+                                                            <img src="data:image/png;base64,<%= e.user.pfp.toString('base64') %>"
                                                                 class="w-8 h-8 rounded-full object-cover" alt="">
                                                             <p><span class="font-bold">
-                                                                    <%= user.username %>
+                                                                    <%= e.user.username %>
                                                                 </span></p>
 
                                                             <p class="text-zinc-400">
-                                                                <%= user.content %>
+                                                                <%= e.content %>
                                                             </p>
                                                         </div>
                                                         <span class="text-zinc-500 text-[12px] ml-10">
