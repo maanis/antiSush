@@ -43,18 +43,51 @@ router.get('/setup', isLoggedIn, function (req, res, next) {
 router.get('/profile', isLoggedIn, async function (req, res, next) {
   // console.log(req.user)
   // let user = await userModel.findOne({ email: req.user.email }).populate('posts')
-  let user = await req.user.populate('posts')
-  console.log(user)
-  res.render('profile', { user });
+  dayJs.extend(relativeTime)
+  try {
+    const user = await userModel.findById(req.user._id)
+      .populate({
+        path: 'posts', // Populate user's posts
+        populate: [
+          { path: 'user', model: 'user' }, // Populate the author of the post
+          {
+            path: 'comments.user', // Populate the user in comments
+            model: 'user'
+          }
+        ]
+      })
+      .exec();
+
+    console.log(user.posts)
+    res.render('profile', { user, dayJs, posts: user.posts }); // Ensure posts is user.posts
+  } catch (error) {
+    console.error('Error populating user data:', error.message);
+    res.status(500).send('An error occurred');
+  }
+
+
+
+  // console.log(user)
 })
 
 router.get('/profile/:id', isLoggedIn, async function (req, res, next) {
   let currentUser = req.user
+  dayJs.extend(relativeTime)
+  try {
+    let posts = await postModel
+      .find()
+      .populate({ path: 'comments.user', model: 'user' });
+    console.log(posts[4].posts.comments.content);
+  } catch (error) {
+    console.error(error);
+  }
+
+
   if (req.user._id.toString() === req.params.id) {
     res.redirect('/profile')
   } else {
     let user = await userModel.findOne({ _id: req.params.id }).populate('posts')
-    res.render('userProfile', { user, currentUser });
+    res.render('userProfile', { user, currentUser, dayJs, posts });
   }
 })
 router.get('/follow/:id', isLoggedIn, async function (req, res, next) {
