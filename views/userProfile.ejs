@@ -130,11 +130,14 @@
 
                                                     <% e.comments.reverse().forEach(e=> { %>
                                                         <div class="flex items-center mt-4 gap-2">
-                                                            <img src="data:image/png;base64,<%= e.user.pfp.toString('base64') %>"
-                                                                class="w-8 h-8 rounded-full object-cover" alt="">
-                                                            <p><span class="font-bold">
-                                                                    <%= e.user.username %>
-                                                                </span></p>
+                                                            <a href="/profile/<%= e.user._id %>"
+                                                                class="flex items-center gap-2">
+                                                                <img src="data:image/png;base64,<%= e.user.pfp.toString('base64') %>"
+                                                                    class="w-8 h-8 rounded-full object-cover" alt="">
+                                                                <p><span class="font-bold">
+                                                                        <%= e.user.username %>
+                                                                    </span></p>
+                                                            </a>
 
                                                             <p class="text-zinc-400">
                                                                 <%= e.content %>
