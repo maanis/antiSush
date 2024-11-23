@@ -73,11 +73,11 @@ inp.addEventListener('input', () => {
                 const base64Image = btoa(
                     buffer.reduce((data, byte) => data + String.fromCharCode(byte), '')
                 );
-                clutter += `<a href= '/profile/${e._id}' class="flex cursor-pointer items-center gap-2 ">
+                clutter += `<a href= '/profile/${e._id}' class="flex border-b-[1px] rounded-md p-2 border-zinc-500  cursor-pointer items-center gap-2 ">
                             <img loading='lazy' src='data:image/png;base64,${base64Image}' class="w-10 h-10 object-cover rounded-full" alt="">
                             <div>
-                                <h2 class='text-black font-semibold'>${e.username}</h2>
-                                <p class="text-[13px] text-zinc-700">${e.name}</p>
+                                <h2 class=' font-semibold'>${e.username}</h2>
+                                <p class="text-[13px] text-zinc-300">${e.name}</p>
                             </div>
                         </a>`
             })
