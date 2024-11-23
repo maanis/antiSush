@@ -7,6 +7,7 @@ const cancel = document.querySelectorAll('.cancel')
 const cont = document.querySelectorAll('.ellipsisContainer')
 const comm = document.querySelectorAll('.commentContainer')
 const close = document.querySelectorAll('.closeComment')
+let inp = document.querySelector('.inputVal')
 
 
 dot.forEach((elem, id) => {
@@ -52,12 +53,39 @@ close.forEach((elem, id) => {
 
 
 
+inp.addEventListener('input', () => {
+    if (inp.value === '') {
+        document.querySelector('.inp-cont').style.display = 'none'
+        document.querySelector('.empty').style.display = 'flex'
+        document.querySelector('.users').style.display = 'none'
+    } else {
+        document.querySelector('.inp-cont').style.display = 'block'
+        document.querySelector('.empty').style.display = 'none'
+        document.querySelector('.users').style.display = 'flex'
+    }
 
-// function hide() {
-//     cont.forEach(e => {
-//         e.style.display = 'none'
-//     })
-// }
+    axios.get(`/search/${inp.value}`)
+        .then((data) => {
+            document.querySelector('.users').innerHTML = ''
+            let clutter = ''
+            data.data.forEach(e => {
+                const buffer = new Uint8Array(e.pfp.data); // Convert the buffer to a typed array
+                const base64Image = btoa(
+                    buffer.reduce((data, byte) => data + String.fromCharCode(byte), '')
+                );
+                clutter += `<a href= '/profile/${e._id}' class="flex cursor-pointer items-center gap-2 ">
+                            <img loading='lazy' src='data:image/png;base64,${base64Image}' class="w-10 h-10 object-cover rounded-full" alt="">
+                            <div>
+                                <h2 class='text-black font-semibold'>${e.username}</h2>
+                                <p class="text-[13px] text-zinc-700">${e.name}</p>
+                            </div>
+                        </a>`
+            })
+            document.querySelector('.users').innerHTML = clutter
+        })
+})
+
+
 
 // async function main() {
 //     let res = await fetch(url)

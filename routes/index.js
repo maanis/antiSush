@@ -150,6 +150,12 @@ router.get('/followw/:id', isLoggedIn, async function (req, res, next) {
   res.redirect('/home')
 
 })
+router.get('/search/:input', isLoggedIn, async function (req, res, next) {
+  const regex = new RegExp(`^${req.params.input}`, 'i');
+  const users = await userModel.find({ username: regex })
+  res.json(users)
+})
+
 
 
 router.get('/like/:id', isLoggedIn, async function (req, res, next) {
