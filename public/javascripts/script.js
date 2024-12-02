@@ -83,6 +83,7 @@ inp.addEventListener('input', () => {
             })
             document.querySelector('.users').innerHTML = clutter
         })
+        
 })
 
 
