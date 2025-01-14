@@ -2,7 +2,7 @@ require('dotenv').config()
 var createError = require('http-errors');
 var express = require('express');
 
-const db = require('./configs/mongoose-connection')
+const db = require('./configs/')
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
